@@ -1,4 +1,3 @@
-// Datos de cursos agrupados por semestre
 const cursosPorSemestre = [
   {
     nombre: "Primer Año - I Semestre",
@@ -21,35 +20,11 @@ const cursosPorSemestre = [
       { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [] },
       { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [] },
     ]
-  },
-  {
-    nombre: "Segundo Año - III Semestre",
-    cursos: [
-      { id: "constitucional1", nombre: "Constitucional I", requisitos: ["fund_publico"] },
-      { id: "privado1", nombre: "Privado I", requisitos: ["fund_privado"] },
-      { id: "penal1", nombre: "Penal I", requisitos: ["criminologia"] },
-      { id: "procesal1", nombre: "Procesal I", requisitos: ["teoria_sistema"] },
-      { id: "validez", nombre: "Validez Espacial y Temporal del Derecho", requisitos: [] },
-      { id: "ingles1", nombre: "Inglés I", requisitos: [] },
-    ]
-  },
-  {
-    nombre: "Segundo Año - IV Semestre",
-    cursos: [
-      { id: "privado2", nombre: "Privado II", requisitos: ["privado1"] },
-      { id: "penal2", nombre: "Penal II", requisitos: ["penal1"] },
-      { id: "procesal2", nombre: "Procesal II", requisitos: ["procesal1"] },
-      { id: "constitucional2", nombre: "Constitucional II", requisitos: ["constitucional1"] },
-      { id: "internacional", nombre: "Internacional", requisitos: ["validez"] },
-      { id: "ingles2", nombre: "Inglés II", requisitos: ["ingles1"] },
-    ]
-  },
+  }
 ];
 
-// Estado aprobados
 const aprobados = {};
 
-// Chequea si el ramo puede aprobarse (todos los requisitos aprobados)
 function puedeAprobar(id) {
   for (const semestre of cursosPorSemestre) {
     for (const curso of semestre.cursos) {
@@ -61,7 +36,6 @@ function puedeAprobar(id) {
   return false;
 }
 
-// Alterna estado aprobado, si puede aprobarse
 function toggleAprobar(id) {
   if (!puedeAprobar(id)) {
     alert("Este ramo está bloqueado. Debes aprobar los requisitos primero.");
@@ -71,7 +45,6 @@ function toggleAprobar(id) {
   actualizarVisual();
 }
 
-// Crea el HTML para semestres y ramos
 function generarMalla() {
   const malla = document.getElementById('malla');
   malla.innerHTML = '';
@@ -96,7 +69,6 @@ function generarMalla() {
   }
 }
 
-// Actualiza visual para mostrar bloqueados y aprobados
 function actualizarVisual() {
   for (const semestre of cursosPorSemestre) {
     for (const curso of semestre.cursos) {
