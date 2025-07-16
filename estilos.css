@@ -1,66 +1,74 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #fdf6f9;
+  background: #fff0f5;
+  color: #4b1c33;
   padding: 20px;
-  color: #333;
 }
 
 h1 {
   text-align: center;
+  margin-bottom: 30px;
   color: #7b1e3e;
-  margin-bottom: 40px;
 }
 
 .malla-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
 }
 
 .course {
-  padding: 12px;
   background-color: #ffc0cb;
-  border-left: 6px solid #a52a2a;
+  border-left: 6px solid #800000;
   border-radius: 8px;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: transform 0.2s, background-color 0.3s;
+  padding: 16px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.15);
+  text-align: center;
+  transition: background-color 0.3s ease;
   user-select: none;
-  position: relative;
 }
 
-.course.locked {
+.course.bloqueado {
   background-color: #f3e5f5;
-  opacity: 0.5;
-  cursor: not-allowed;
+  color: #b88aa2;
+  opacity: 0.6;
+  cursor: default;
 }
 
-.course.unlocked:hover {
-  transform: scale(1.03);
-  background-color: #f08080;
+.course.desbloqueado {
+  cursor: pointer;
 }
 
-.course.approved {
-  background-color: #d81b60;
+.course.aprobado {
+  background-color: #800000;
   color: white;
   text-decoration: line-through;
+  cursor: default;
 }
 
-.course .status {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 0.8em;
-  background: white;
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: #7b1e3e;
+.course h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+}
+
+.status-text {
+  margin: 12px 0;
   font-weight: bold;
-  display: none;
 }
 
-.course.approved .status {
-  display: block;
+button {
+  padding: 6px 14px;
+  background-color: #c71545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #90002c;
 }
