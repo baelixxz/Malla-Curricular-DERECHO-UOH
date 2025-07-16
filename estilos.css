@@ -11,64 +11,59 @@ h1 {
   color: #7b1e3e;
 }
 
-.malla-container {
+.contenedor-malla {
   max-width: 1100px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
 }
 
-.course {
-  background-color: #ffc0cb;
-  border-left: 6px solid #800000;
+.ramo {
+  background: #ffc0cb; /* rosa claro */
+  border: 2px solid #800000; /* burdeos */
   border-radius: 8px;
-  padding: 16px;
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.15);
-  text-align: center;
-  transition: background-color 0.3s ease;
+  margin: 8px 0;
+  padding: 12px;
+  cursor: pointer;
   user-select: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(128, 0, 0, 0.3);
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
-.course.bloqueado {
-  background-color: #f3e5f5;
+.ramo.bloqueado {
+  background-color: #f3e5f5; /* rosa muy pálido */
   color: #b88aa2;
   opacity: 0.6;
-  cursor: default;
+  cursor: not-allowed;
+  box-shadow: none;
+  text-decoration: none;
 }
 
-.course.desbloqueado {
-  cursor: pointer;
-}
-
-.course.aprobado {
-  background-color: #800000;
+.ramo.aprobado {
+  background-color: #800000; /* burdeos */
   color: white;
   text-decoration: line-through;
   cursor: default;
+  box-shadow: 0 2px 10px rgba(128, 0, 0, 0.8);
 }
 
-.course h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.1rem;
+.ramo:hover:not(.bloqueado):not(.aprobado) {
+  background-color: #ff99aa; /* rosa medio al pasar mouse */
+  border-color: #b22222; /* rojo quemado */
 }
 
-.status-text {
-  margin: 12px 0;
-  font-weight: bold;
-}
+@media (max-width: 600px) {
+  .contenedor-malla {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 
-button {
-  padding: 6px 14px;
-  background-color: #c71545;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-button:hover {
-  background-color: #90002c;
+  .ramo {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }
