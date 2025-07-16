@@ -1,1 +1,67 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fdf6f9;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #7b1e3e;
+  margin-bottom: 40px;
+}
+
+.malla-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.course {
+  padding: 12px;
+  background-color: #ffc0cb;
+  border-left: 6px solid #a52a2a;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+  user-select: none;
+  position: relative;
+}
+
+.course.locked {
+  background-color: #f3e5f5;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.course.unlocked:hover {
+  transform: scale(1.03);
+  background-color: #f08080;
+}
+
+.course.approved {
+  background-color: #d81b60;
+  color: white;
+  text-decoration: line-through;
+}
+
+.course .status {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.8em;
+  background: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #7b1e3e;
+  font-weight: bold;
+  display: none;
+}
+
+.course.approved .status {
+  display: block;
+}
 
