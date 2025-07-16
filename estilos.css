@@ -1,5 +1,6 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Arial Nova", Arial, sans-serif;
+  font-size: 12pt;
   background: #fff0f5;
   color: #4b1c33;
   padding: 20px;
@@ -11,55 +12,35 @@ h1 {
   color: #7b1e3e;
 }
 
-#malla {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 10px;
-  max-width: 100%;
+.contenedor-malla {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.semestre {
-  min-width: 300px;
-  flex-shrink: 0;
-  background-color: #ffe4e1;
-  padding: 10px;
-  border-radius: 12px;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-}
-
-.semestre h2 {
-  text-align: center;
-  color: #7b1e3e;
-  margin-bottom: 15px;
-}
-
-.course {
-  background-color: #ffc0cb;
-  border-left: 6px solid #800000;
+.ramo {
+  background: #ffc0cb;
+  border: 2px solid #800000;
   border-radius: 8px;
   padding: 12px;
-  margin-bottom: 10px;
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-  text-align: center;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
   user-select: none;
-  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
-.course.bloqueado {
-  background-color: #f3e5f5;
-  color: #b88aa2;
-  opacity: 0.6;
+.ramo:hover {
+  background-color: #ffb6c1;
+}
+
+.ramo.bloqueado {
+  opacity: 0.4;
   cursor: default;
 }
 
-.course.desbloqueado {
-  cursor: pointer;
-}
-
-.course.aprobado {
-  background-color: #800000;
+.ramo.aprobado {
+  background: #800000;
   color: white;
   text-decoration: line-through;
   cursor: default;
