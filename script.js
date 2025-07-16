@@ -1,82 +1,118 @@
-const cursos = [
-  { id: "fund_privado", nombre: "Fund. Derecho Privado", requisitos: [], semestre: 1 },
-  { id: "fund_publico", nombre: "Fund. Derecho Público", requisitos: [], semestre: 1 },
-  { id: "historia", nombre: "Historia Jurídica", requisitos: [], semestre: 1 },
-  { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [], semestre: 1 },
-  { id: "lenguaje", nombre: "Lenguaje Jurídico", requisitos: [], semestre: 1 },
-  { id: "taller_oral", nombre: "Taller Oral y Escrita", requisitos: [], semestre: 1 },
-  
-  { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [], semestre: 2 },
-  { id: "criminologia", nombre: "Criminología", requisitos: [], semestre: 2 },
-  { id: "teoria_sistema", nombre: "Teoría del Sistema", requisitos: [], semestre: 2 },
-  { id: "metod_investigacion", nombre: "Metodología Jurídica", requisitos: [], semestre: 2 },
-  { id: "tradiciones", nombre: "Tradiciones Comparadas", requisitos: [], semestre: 2 },
-  { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [], semestre: 2 },
-  // Puedes seguir agregando más cursos por semestre
+// Datos de cursos agrupados por semestre
+const cursosPorSemestre = [
+  {
+    nombre: "Primer Año - I Semestre",
+    cursos: [
+      { id: "fund_privado", nombre: "Fundamentos de Derecho Privado", requisitos: [] },
+      { id: "fund_publico", nombre: "Fundamentos de Derecho Público", requisitos: [] },
+      { id: "historia", nombre: "Historia de las Ideas e Instituciones Jurídicas", requisitos: [] },
+      { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [] },
+      { id: "lenguaje", nombre: "Lenguaje del Derecho", requisitos: [] },
+      { id: "taller_oral", nombre: "Taller de Expresión Oral y Escrita", requisitos: [] },
+    ]
+  },
+  {
+    nombre: "Primer Año - II Semestre",
+    cursos: [
+      { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [] },
+      { id: "criminologia", nombre: "Criminología y Política Criminal", requisitos: [] },
+      { id: "teoria_sistema", nombre: "Teoría del Sistema Jurídico", requisitos: [] },
+      { id: "metod_investigacion", nombre: "Metodología de la Investigación Jurídico-Social", requisitos: [] },
+      { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [] },
+      { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [] },
+    ]
+  },
+  {
+    nombre: "Segundo Año - III Semestre",
+    cursos: [
+      { id: "constitucional1", nombre: "Constitucional I", requisitos: ["fund_publico"] },
+      { id: "privado1", nombre: "Privado I", requisitos: ["fund_privado"] },
+      { id: "penal1", nombre: "Penal I", requisitos: ["criminologia"] },
+      { id: "procesal1", nombre: "Procesal I", requisitos: ["teoria_sistema"] },
+      { id: "validez", nombre: "Validez Espacial y Temporal del Derecho", requisitos: [] },
+      { id: "ingles1", nombre: "Inglés I", requisitos: [] },
+    ]
+  },
+  {
+    nombre: "Segundo Año - IV Semestre",
+    cursos: [
+      { id: "privado2", nombre: "Privado II", requisitos: ["privado1"] },
+      { id: "penal2", nombre: "Penal II", requisitos: ["penal1"] },
+      { id: "procesal2", nombre: "Procesal II", requisitos: ["procesal1"] },
+      { id: "constitucional2", nombre: "Constitucional II", requisitos: ["constitucional1"] },
+      { id: "internacional", nombre: "Internacional", requisitos: ["validez"] },
+      { id: "ingles2", nombre: "Inglés II", requisitos: ["ingles1"] },
+    ]
+  },
 ];
 
-const malla = document.getElementById("malla");
+// Estado aprobados
 const aprobados = {};
 
+// Chequea si el ramo puede aprobarse (todos los requisitos aprobados)
 function puedeAprobar(id) {
-  const curso = cursos.find(c => c.id === id);
-  return curso.requisitos.every(req => aprobados[req]);
+  for (const semestre of cursosPorSemestre) {
+    for (const curso of semestre.cursos) {
+      if (curso.id === id) {
+        return curso.requisitos.every(r => aprobados[r]);
+      }
+    }
+  }
+  return false;
 }
 
-function aprobar(id) {
-  const curso = cursos.find(c => c.id === id);
+// Alterna estado aprobado, si puede aprobarse
+function toggleAprobar(id) {
   if (!puedeAprobar(id)) {
-    alert("Este ramo está bloqueado. Debes aprobar los requisitos.");
+    alert("Este ramo está bloqueado. Debes aprobar los requisitos primero.");
     return;
   }
-  aprobados[id] = true;
+  aprobados[id] = !aprobados[id];
   actualizarVisual();
 }
 
-function crearMalla() {
-  const semestres = [...new Set(cursos.map(c => c.semestre))];
-  
-  semestres.forEach(n => {
-    const contenedor = document.createElement("div");
-    contenedor.className = "semestre";
+// Crea el HTML para semestres y ramos
+function generarMalla() {
+  const malla = document.getElementById('malla');
+  malla.innerHTML = '';
+  for (const semestre of cursosPorSemestre) {
+    const divSemestre = document.createElement('div');
+    divSemestre.className = 'semestre';
 
-    const titulo = document.createElement("h2");
-    titulo.textContent = `Semestre ${n}`;
-    contenedor.appendChild(titulo);
+    const h2 = document.createElement('h2');
+    h2.textContent = semestre.nombre;
+    divSemestre.appendChild(h2);
 
-    const grid = document.createElement("div");
-    grid.className = "ramos-grid";
-
-    cursos
-      .filter(c => c.semestre === n)
-      .forEach(curso => {
-        const div = document.createElement("div");
-        div.className = "ramo";
-        div.id = curso.id;
-        div.textContent = curso.nombre;
-        div.addEventListener("click", () => aprobar(curso.id));
-        grid.appendChild(div);
-      });
-
-    contenedor.appendChild(grid);
-    malla.appendChild(contenedor);
-  });
-}
-
-function actualizarVisual() {
-  cursos.forEach(curso => {
-    const div = document.getElementById(curso.id);
-    if (aprobados[curso.id]) {
-      div.classList.add("aprobado");
-      div.classList.remove("bloqueado");
-    } else if (!puedeAprobar(curso.id)) {
-      div.classList.add("bloqueado");
-      div.classList.remove("aprobado");
-    } else {
-      div.classList.remove("bloqueado", "aprobado");
+    for (const curso of semestre.cursos) {
+      const divRamo = document.createElement('div');
+      divRamo.className = 'ramo';
+      divRamo.id = curso.id;
+      divRamo.textContent = curso.nombre;
+      divRamo.addEventListener('click', () => toggleAprobar(curso.id));
+      divSemestre.appendChild(divRamo);
     }
-  });
+
+    malla.appendChild(divSemestre);
+  }
 }
 
-crearMalla();
+// Actualiza visual para mostrar bloqueados y aprobados
+function actualizarVisual() {
+  for (const semestre of cursosPorSemestre) {
+    for (const curso of semestre.cursos) {
+      const div = document.getElementById(curso.id);
+      if (aprobados[curso.id]) {
+        div.classList.add('aprobado');
+        div.classList.remove('bloqueado');
+      } else if (!puedeAprobar(curso.id)) {
+        div.classList.add('bloqueado');
+        div.classList.remove('aprobado');
+      } else {
+        div.classList.remove('bloqueado', 'aprobado');
+      }
+    }
+  }
+}
+
+generarMalla();
 actualizarVisual();
