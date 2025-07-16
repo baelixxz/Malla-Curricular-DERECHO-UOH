@@ -1,13 +1,208 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Malla Curricular Interactiva</title>
-  <link rel="stylesheet" href="estilos.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Malla Curricular Interactiva</title>
+<style>
+  @font-face {
+    font-family: 'Arial Nova Cont';
+    src: local('Arial Nova Condensed'), local('Arial Nova Cont');
+  }
+
+  body {
+    font-family: 'Arial Nova Cont', Arial, sans-serif;
+    font-size: 12pt;
+    background: #fff0f5;
+    color: #4b1c33;
+    padding: 20px;
+    margin: 0;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #7b1e3e;
+  }
+
+  #malla {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .semestre {
+    background: #ffe4ec;
+    border-radius: 10px;
+    width: 280px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .semestre h2 {
+    text-align: center;
+    margin: 0 0 15px 0;
+    color: #800000;
+  }
+
+  .ramo {
+    background: #ffc0cb;
+    border: 2px solid #800000;
+    border-radius: 8px;
+    margin: 6px 0;
+    padding: 10px 14px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+  }
+
+  .ramo.bloqueado {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .ramo.aprobado {
+    background: #800000;
+    color: white;
+    text-decoration: line-through;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
-  <h1>Malla Curricular Derecho - Interactiva</h1>
-  <div id="malla"></div>
-  <script src="script.js"></script>
+
+<h1>Malla Curricular Derecho - Interactiva</h1>
+
+<div id="malla">
+  <!-- Semestres y ramos generados por JS -->
+</div>
+
+<script>
+  // Lista completa de ramos con id, nombre y requisitos
+  const cursosPorSemestre = [
+    {
+      nombre: "Primer Año - I Semestre",
+      cursos: [
+        { id: "fund_privado", nombre: "Fundamentos de Derecho Privado", requisitos: [] },
+        { id: "fund_publico", nombre: "Fundamentos de Derecho Público", requisitos: [] },
+        { id: "historia", nombre: "Historia de las Ideas e Instituciones Jurídicas", requisitos: [] },
+        { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [] },
+        { id: "lenguaje", nombre: "Lenguaje del Derecho", requisitos: [] },
+        { id: "taller_oral", nombre: "Taller de Expresión Oral y Escrita", requisitos: [] },
+      ]
+    },
+    {
+      nombre: "Primer Año - II Semestre",
+      cursos: [
+        { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [] },
+        { id: "criminologia", nombre: "Criminología y Política Criminal", requisitos: [] },
+        { id: "teoria_sistema", nombre: "Teoría del Sistema Jurídico", requisitos: [] },
+        { id: "metod_investigacion", nombre: "Metodología de la Investigación Jurídico-Social", requisitos: [] },
+        { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [] },
+        { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [] },
+      ]
+    },
+    {
+      nombre: "Segundo Año - III Semestre",
+      cursos: [
+        { id: "constitucional1", nombre: "Constitucional I", requisitos: ["fund_publico"] },
+        { id: "privado1", nombre: "Privado I", requisitos: ["fund_privado"] },
+        { id: "penal1", nombre: "Penal I", requisitos: ["criminologia"] },
+        { id: "procesal1", nombre: "Procesal I", requisitos: ["teoria_sistema"] },
+        { id: "validez", nombre: "Validez Espacial y Temporal del Derecho", requisitos: [] },
+        { id: "ingles1", nombre: "Inglés I", requisitos: [] },
+      ]
+    },
+    {
+      nombre: "Segundo Año - IV Semestre",
+      cursos: [
+        { id: "privado2", nombre: "Privado II", requisitos: ["privado1"] },
+        { id: "penal2", nombre: "Penal II", requisitos: ["penal1"] },
+        { id: "procesal2", nombre: "Procesal II", requisitos: ["procesal1"] },
+        { id: "constitucional2", nombre: "Constitucional II", requisitos: ["constitucional1"] },
+        { id: "internacional", nombre: "Internacional", requisitos: ["validez"] },
+        { id: "ingles2", nombre: "Inglés II", requisitos: ["ingles1"] },
+      ]
+    },
+    // Puedes agregar más semestres aquí siguiendo el mismo formato...
+  ];
+
+  // Objeto para guardar estado de aprobados
+  const aprobados = {};
+
+  // Devuelve true si el ramo puede aprobarse (todos requisitos aprobados)
+  function puedeAprobar(id) {
+    for (const semestre of cursosPorSemestre) {
+      for (const curso of semestre.cursos) {
+        if (curso.id === id) {
+          return curso.requisitos.every(r => aprobados[r]);
+        }
+      }
+    }
+    return false;
+  }
+
+  // Alterna el estado aprobado de un ramo si se puede
+  function toggleAprobar(id) {
+    if (!puedeAprobar(id)) {
+      alert("Este ramo está bloqueado. Debes aprobar los requisitos primero.");
+      return;
+    }
+    aprobados[id] = !aprobados[id];
+    actualizarVisual();
+  }
+
+  // Genera la estructura HTML por semestre y cursos
+  function generarMalla() {
+    const malla = document.getElementById('malla');
+    malla.innerHTML = '';
+    for (const semestre of cursosPorSemestre) {
+      const divSemestre = document.createElement('div');
+      divSemestre.className = 'semestre';
+
+      const h2 = document.createElement('h2');
+      h2.textContent = semestre.nombre;
+      divSemestre.appendChild(h2);
+
+      for (const curso of semestre.cursos) {
+        const divRamo = document.createElement('div');
+        divRamo.className = 'ramo';
+        divRamo.id = curso.id;
+        divRamo.textContent = curso.nombre;
+        divRamo.addEventListener('click', () => toggleAprobar(curso.id));
+        divSemestre.appendChild(divRamo);
+      }
+
+      malla.appendChild(divSemestre);
+    }
+  }
+
+  // Actualiza la visualización según estado aprobado o bloqueado
+  function actualizarVisual() {
+    for (const semestre of cursosPorSemestre) {
+      for (const curso of semestre.cursos) {
+        const div = document.getElementById(curso.id);
+        if (aprobados[curso.id]) {
+          div.classList.add('aprobado');
+          div.classList.remove('bloqueado');
+        } else if (!puedeAprobar(curso.id)) {
+          div.classList.add('bloqueado');
+          div.classList.remove('aprobado');
+        } else {
+          div.classList.remove('bloqueado', 'aprobado');
+        }
+      }
+    }
+  }
+
+  generarMalla();
+  actualizarVisual();
+</script>
+
 </body>
 </html>
