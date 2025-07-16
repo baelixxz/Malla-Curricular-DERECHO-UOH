@@ -1,8 +1,14 @@
+@font-face {
+  font-family: 'Arial Nova Cont';
+  src: local('Arial Nova Condensed'), local('Arial Nova Cont');
+}
+
 body {
-  font-family: "Arial Nova", Arial, sans-serif;
+  font-family: 'Arial Nova Cont', Arial, sans-serif;
   font-size: 12pt;
   background: #fff0f5;
   color: #4b1c33;
+  margin: 0;
   padding: 20px;
 }
 
@@ -12,52 +18,62 @@ h1 {
   color: #7b1e3e;
 }
 
+/* Contenedor principal: flex para semestres alineados horizontalmente */
+#malla {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: nowrap; /* Si quieres que baje, cambia a wrap */
+  overflow-x: auto; /* Scroll horizontal si no cabe */
+  padding-bottom: 10px;
+}
+
+/* Cada semestre es un rectángulo grande */
 .semestre {
-  margin-bottom: 30px;
-  border: 2px solid #eab0c0;
+  background: #ffe4ec;
   border-radius: 10px;
+  width: 300px;
   padding: 15px;
-  background-color: #ffe4ec;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow-y: auto; /* Si muchos ramos, scroll vertical */
 }
 
+/* Título semestre */
 .semestre h2 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 16pt;
-  color: #80002c;
-  border-bottom: 1px solid #d98aa0;
-  padding-bottom: 5px;
+  text-align: center;
+  margin: 0 0 15px 0;
+  color: #800000;
+  font-weight: 700;
+  user-select: none;
 }
 
-.ramos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 15px;
-}
-
+/* Cada ramo dentro del semestre */
 .ramo {
   background: #ffc0cb;
   border: 2px solid #800000;
   border-radius: 8px;
-  padding: 12px;
+  margin: 6px 0;
+  padding: 10px 14px;
   cursor: pointer;
   user-select: none;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   text-align: center;
+  flex-shrink: 0;
 }
 
-.ramo:hover {
-  background-color: #ffb6c1;
-}
-
+/* Ramo bloqueado (no clickeable y opaco) */
 .ramo.bloqueado {
-  opacity: 0.4;
+  opacity: 0.5;
   cursor: default;
 }
 
+/* Ramo aprobado (color burdeos y tachado) */
 .ramo.aprobado {
   background: #800000;
   color: white;
   text-decoration: line-through;
-  cursor: default;
+  cursor: pointer;
 }
