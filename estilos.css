@@ -12,12 +12,27 @@ h1 {
   color: #7b1e3e;
 }
 
-.contenedor-malla {
+.semestre {
+  margin-bottom: 30px;
+  border: 2px solid #eab0c0;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #ffe4ec;
+}
+
+.semestre h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 16pt;
+  color: #80002c;
+  border-bottom: 1px solid #d98aa0;
+  padding-bottom: 5px;
+}
+
+.ramos-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 15px;
-  max-width: 1200px;
-  margin: auto;
 }
 
 .ramo {
@@ -28,6 +43,7 @@ h1 {
   cursor: pointer;
   user-select: none;
   transition: all 0.3s ease;
+  text-align: center;
 }
 
 .ramo:hover {
