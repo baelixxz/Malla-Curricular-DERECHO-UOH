@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'Arial Nova Cont';
-  src: local('Arial Nova Condensed'), local('Arial Nova Cont');
-}
-
 body {
   font-family: 'Arial Nova Cont', Arial, sans-serif;
   font-size: 12pt;
@@ -18,27 +13,27 @@ h1 {
   color: #7b1e3e;
 }
 
-/* Contenedor principal: flex para semestres alineados horizontalmente */
+/* Contenedor que pone los semestres en fila, con espacio */
 #malla {
   display: flex;
   gap: 30px;
   justify-content: center;
-  flex-wrap: nowrap; /* Si quieres que baje, cambia a wrap */
-  overflow-x: auto; /* Scroll horizontal si no cabe */
+  flex-wrap: nowrap;
+  overflow-x: auto; /* scroll horizontal si no cabe */
   padding-bottom: 10px;
 }
 
-/* Cada semestre es un rectángulo grande */
+/* Cada semestre es un rectángulo grande con borde y fondo rosado claro */
 .semestre {
   background: #ffe4ec;
   border-radius: 10px;
-  width: 300px;
+  width: 320px;
   padding: 15px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  max-height: 90vh;
-  overflow-y: auto; /* Si muchos ramos, scroll vertical */
+  max-height: 85vh;
+  overflow-y: auto; /* scroll vertical si muchos ramos */
 }
 
 /* Título semestre */
@@ -50,7 +45,7 @@ h1 {
   user-select: none;
 }
 
-/* Cada ramo dentro del semestre */
+/* Ramo dentro del semestre */
 .ramo {
   background: #ffc0cb;
   border: 2px solid #800000;
@@ -64,13 +59,13 @@ h1 {
   flex-shrink: 0;
 }
 
-/* Ramo bloqueado (no clickeable y opaco) */
+/* Ramo bloqueado */
 .ramo.bloqueado {
   opacity: 0.5;
   cursor: default;
 }
 
-/* Ramo aprobado (color burdeos y tachado) */
+/* Ramo aprobado */
 .ramo.aprobado {
   background: #800000;
   color: white;
