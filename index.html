@@ -1,13 +1,184 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Malla Curricular Derecho</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<title>Malla Curricular Interactiva</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #fff0f5;
+    color: #4b1c33;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #7b1e3e;
+  }
+  .ramo {
+    background: #ffc0cb;
+    border: 2px solid #800000;
+    border-radius: 8px;
+    margin: 8px;
+    padding: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .ramo.bloqueado {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .ramo.aprobado {
+    background: #800000;
+    color: white;
+    text-decoration: line-through;
+    cursor: default;
+  }
+  .contenedor-malla {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  h2 {
+    color: #800000;
+    margin-top: 40px;
+  }
+</style>
 </head>
 <body>
-  <h1>Malla Curricular Derecho</h1>
-  <div id="malla" class="malla-container"></div>
-  <script src="script.js"></script>
+
+<h1>Malla Curricular Derecho - Interactiva</h1>
+
+<div class="contenedor-malla" id="malla">
+  <!-- Aquí se crean los ramos -->
+</div>
+
+<script>
+  // Lista completa de ramos con id y requisitos
+  const cursos = [
+    // Primer año I Semestre
+    { id: "fund_privado", nombre: "Fundamentos de Derecho Privado", requisitos: [] },
+    { id: "fund_publico", nombre: "Fundamentos de Derecho Público", requisitos: [] },
+    { id: "historia", nombre: "Historia de las Ideas e Instituciones Jurídicas", requisitos: [] },
+    { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [] },
+    { id: "lenguaje", nombre: "Lenguaje del Derecho", requisitos: [] },
+    { id: "taller_oral", nombre: "Taller de Expresión Oral y Escrita", requisitos: [] },
+    // Primer año II Semestre
+    { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [] },
+    { id: "criminologia", nombre: "Criminología y Política Criminal", requisitos: [] },
+    { id: "teoria_sistema", nombre: "Teoría del Sistema Jurídico", requisitos: [] },
+    { id: "metod_investigacion", nombre: "Metodología de la Investigación Jurídico-Social", requisitos: [] },
+    { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [] },
+    { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [] },
+
+    // Segundo Año III Semestre
+    { id: "constitucional1", nombre: "Constitucional I", requisitos: ["fund_publico"] },
+    { id: "privado1", nombre: "Privado I", requisitos: ["fund_privado"] },
+    { id: "penal1", nombre: "Penal I", requisitos: ["criminologia"] },
+    { id: "procesal1", nombre: "Procesal I", requisitos: ["teoria_sistema"] },
+    { id: "validez", nombre: "Validez Espacial y Temporal del Derecho", requisitos: [] },
+    { id: "ingles1", nombre: "Inglés I", requisitos: [] },
+
+    // Segundo Año IV Semestre
+    { id: "privado2", nombre: "Privado II", requisitos: ["privado1"] },
+    { id: "penal2", nombre: "Penal II", requisitos: ["penal1"] },
+    { id: "procesal2", nombre: "Procesal II", requisitos: ["procesal1"] },
+    { id: "constitucional2", nombre: "Constitucional II", requisitos: ["constitucional1"] },
+    { id: "internacional", nombre: "Internacional", requisitos: ["validez"] },
+    { id: "ingles2", nombre: "Inglés II", requisitos: ["ingles1"] },
+
+    // Tercer Año V Semestre
+    { id: "privado3", nombre: "Privado III", requisitos: ["privado2"] },
+    { id: "penal3", nombre: "Penal III", requisitos: ["penal2"] },
+    { id: "procesal3", nombre: "Procesal III", requisitos: ["procesal2"] },
+    { id: "administrativo1", nombre: "Administrativo", requisitos: ["constitucional2"] },
+    { id: "laboral1", nombre: "Laboral I", requisitos: [] },
+    { id: "ingles3", nombre: "Inglés III", requisitos: ["ingles2"] },
+
+    // Tercer Año VI Semestre
+    { id: "privado4", nombre: "Privado IV", requisitos: ["privado3"] },
+    { id: "penal4", nombre: "Penal IV", requisitos: ["penal3"] },
+    { id: "procesal4", nombre: "Procesal IV", requisitos: ["procesal3"] },
+    { id: "administrativo2", nombre: "Administrativo II", requisitos: ["constitucional2"] },
+    { id: "laboral2", nombre: "Laboral II", requisitos: ["laboral1"] },
+    { id: "ingles4", nombre: "Inglés IV", requisitos: ["ingles3"] },
+
+    // Cuarto Año VII Semestre
+    { id: "privado5", nombre: "Privado V", requisitos: ["privado4"] },
+    { id: "procesal_penal", nombre: "Procesal Penal", requisitos: ["penal4"] },
+    { id: "procesal_especial", nombre: "Procesal Especial", requisitos: ["procesal4"] },
+    { id: "tributario", nombre: "Tributario", requisitos: ["administrativo2"] },
+    { id: "comercial1", nombre: "Comercial I", requisitos: ["privado4"] },
+    { id: "ingles5", nombre: "Inglés V", requisitos: ["ingles4"] },
+
+    // Cuarto Año VIII Semestre
+    { id: "comercial2", nombre: "Comercial II", requisitos: ["comercial1"] },
+    { id: "privado6", nombre: "Privado VI", requisitos: ["privado5"] },
+    { id: "clinica1", nombre: "Clínica Jurídica I", requisitos: ["privado5", "procesal_especial", "procesal_penal"] },
+    { id: "etica_prof", nombre: "Ética Profesional", requisitos: ["procesal_especial", "procesal_penal"] },
+    { id: "estrategias_litigacion", nombre: "Estrategias y Técnicas de Litigación", requisitos: [] },
+
+    // Quinto Año IX Semestre
+    { id: "clinica2", nombre: "Clínica Jurídica II", requisitos: ["clinica1"] },
+    { id: "fund_bienes_personas", nombre: "Instituciones Fundamentales del Derecho Civil: Bienes y Personas", requisitos: ["privado6", "procesal_especial"] },
+    { id: "fund_fuentes_obligaciones", nombre: "Instituciones Fundamentales del Derecho Civil: Fuentes de las Obligaciones", requisitos: ["privado6", "procesal_especial"] },
+    { id: "fund_constitucional", nombre: "Instituciones Fundamentales del Derecho Constitucional", requisitos: ["privado6", "procesal_especial"] },
+    { id: "fund_procesal", nombre: "Instituciones Fundamentales del Derecho Procesal", requisitos: ["privado6", "procesal_especial"] },
+    { id: "resolucion_casos", nombre: "Resolución de Casos", requisitos: ["privado6", "procesal_especial"] },
+    { id: "ingles6", nombre: "Inglés VI", requisitos: ["ingles5"] }
+  ];
+
+  const malla = document.getElementById('malla');
+  const aprobados = {};
+
+  function puedeAprobar(id) {
+    const curso = cursos.find(c => c.id === id);
+    if (!curso) return false;
+    return curso.requisitos.every(r => aprobados[r]);
+  }
+
+  function aprobar(id) {
+    if (!puedeAprobar(id)) {
+      alert("Este ramo está bloqueado. Debes aprobar los requisitos primero.");
+      return;
+    }
+    aprobados[id] = true;
+    actualizarVisual();
+  }
+
+  function crearRamo(curso) {
+    const div = document.createElement('div');
+    div.classList.add('ramo');
+    div.id = curso.id;
+    div.textContent = curso.nombre;
+
+    div.addEventListener('click', () => aprobar(curso.id));
+
+    malla.appendChild(div);
+  }
+
+  function actualizarVisual() {
+    cursos.forEach(curso => {
+      const div = document.getElementById(curso.id);
+      if (aprobados[curso.id]) {
+        div.classList.add('aprobado');
+        div.classList.remove('bloqueado');
+      } else if (!puedeAprobar(curso.id)) {
+        div.classList.add('bloqueado');
+        div.classList.remove('aprobado');
+      } else {
+        div.classList.remove('bloqueado', 'aprobado');
+      }
+    });
+  }
+
+  // Crear todos los ramos y actualizar la visual
+  cursos.forEach(crearRamo);
+  actualizarVisual();
+
+</script>
 </body>
 </html>
