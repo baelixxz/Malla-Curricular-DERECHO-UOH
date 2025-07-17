@@ -1,80 +1,86 @@
 body {
-  font-family: 'Arial Nova', Arial, sans-serif;
-  font-size: 12pt;
-  background-color: #D81B60;
   margin: 0;
   padding: 0;
+  background-color: #D81B60;
+  font-family: 'Arial Nova', Arial, sans-serif;
+  font-size: 12pt;
   color: white;
-  overflow-x: auto;
 }
 
-h1 {
+header {
   text-align: center;
   padding: 20px;
-  color: white;
+  font-size: 22pt;
+  font-weight: bold;
 }
 
-.malla {
+.container {
   display: flex;
   flex-direction: row;
-  justify-content: start;
-  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   padding: 20px;
   gap: 20px;
-  min-width: fit-content;
 }
 
-.anio {
-  background-color: #f8bbd0;
-  border-radius: 10px;
-  padding: 15px;
-  min-width: 220px;
+.year-block {
+  background-color: white;
   color: black;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 220px;
+  flex-shrink: 0;
 }
 
-.anio h2 {
-  text-align: center;
-  margin-top: 0;
+.year-title {
+  font-size: 16pt;
   font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .semestre {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.semestre h3 {
-  text-align: center;
+.semestre-title {
   font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .ramo {
-  background-color: #ffffff;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+  background-color: #fff;
+  color: black;
+  padding: 8px;
+  margin: 4px 0;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  text-align: center;
   cursor: pointer;
-  color: #000;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 .ramo:hover {
-  background-color: #e0e0e0;
+  background-color: #f0f0f0;
 }
 
-.desbloqueado {
-  pointer-events: auto;
-  opacity: 1;
-}
-
-.bloqueado {
+.ramo.bloqueado {
   background-color: #ccc;
-  color: #777;
-  pointer-events: none;
+  color: #666;
+  cursor: not-allowed;
 }
 
-.aprobado {
-  background-color: #800020 !important; /* Burdeo fijo */
-  color: white !important;
+.ramo.desbloqueado {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.ramo.aprobado {
+  background-color: #800020; /* burdeo */
+  color: white;
   font-style: italic;
   text-decoration: line-through;
 }
+
