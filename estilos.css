@@ -1,84 +1,80 @@
 body {
   font-family: 'Arial Nova', Arial, sans-serif;
+  font-size: 12pt;
   background-color: #D81B60;
-  color: white;
-  padding: 20px;
   margin: 0;
+  padding: 0;
+  color: white;
+  overflow-x: auto;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
+  padding: 20px;
+  color: white;
 }
 
 .malla {
-  max-width: 1100px;
-  margin: auto;
   display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: flex-start;
+  padding: 20px;
   gap: 20px;
-  justify-content: center;
+  min-width: fit-content;
 }
 
 .anio {
-  background: #ff5aa4;
-  border-radius: 12px;
+  background-color: #f8bbd0;
+  border-radius: 10px;
   padding: 15px;
-  flex: 1 1 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  min-width: 230px;
+  min-width: 220px;
+  color: black;
 }
 
 .anio h2 {
   text-align: center;
-  margin: 0 0 10px 0;
-  font-weight: 700;
+  margin-top: 0;
+  font-weight: bold;
 }
 
 .semestre {
-  background: #ff96c5;
-  border-radius: 8px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  margin-bottom: 15px;
 }
 
 .semestre h3 {
-  margin: 0 0 10px 0;
-  font-weight: 600;
-  font-size: 1.1rem;
   text-align: center;
-  color: white;
+  font-weight: bold;
 }
 
 .ramo {
-  background: #ff1b82;
-  border-radius: 8px;
+  background-color: #ffffff;
   padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
   cursor: pointer;
-  user-select: none;
-  text-align: center;
-  transition: background-color 0.3s ease;
-  color: white;
-  font-weight: 600;
+  color: #000;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.ramo:hover:not(.bloqueado):not(.aprobado) {
-  background: #f70071;
+.ramo:hover {
+  background-color: #e0e0e0;
 }
 
-.ramo.bloqueado {
-  background: #ff96c5;
-  color: #eeeeeecc;
-  cursor: default;
+.desbloqueado {
+  pointer-events: auto;
+  opacity: 1;
 }
 
-.ramo.aprobado {
-  background-color: #f70071 !important;
+.bloqueado {
+  background-color: #ccc;
+  color: #777;
+  pointer-events: none;
+}
+
+.aprobado {
+  background-color: #800020 !important; /* Burdeo fijo */
   color: white !important;
   font-style: italic;
   text-decoration: line-through;
-  cursor: default;
 }
