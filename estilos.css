@@ -1,84 +1,70 @@
-const requisitos = {
-  'ramo13': ['ramo2'],
-  'ramo14': ['ramo8'],
-  'ramo15': ['ramo9'],
-  'ramo16': ['ramo3'],
-  'ramo17': ['ramo12'],
+body {
+  font-family: 'Arial Nova', sans-serif;
+  font-size: 12pt;
+  margin: 0;
+  background-color: #D81B60;
+  color: white;
+}
 
-  'ramo18': ['ramo13'],
-  'ramo19': ['ramo14'],
-  'ramo20': ['ramo15'],
-  'ramo21': ['ramo16'],
-  'ramo22': ['ramo10'],
-  'ramo23': ['ramo17'],
+h1 {
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+}
 
-  'ramo24': ['ramo18'],
-  'ramo25': ['ramo19'],
-  'ramo26': ['ramo20'],
-  'ramo27': ['ramo21'],
-  'ramo29': ['ramo23'],
+.main-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding: 20px;
+  gap: 20px;
+}
 
-  'ramo30': ['ramo24'],
-  'ramo31': ['ramo25'],
-  'ramo32': ['ramo26'],
-  'ramo33': ['ramo21'],
-  'ramo34': ['ramo28'],
-  'ramo35': ['ramo29'],
+.año {
+  flex: 0 0 auto;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  padding: 10px;
+  width: 250px;
+}
 
-  'ramo36': ['ramo30'],
-  'ramo37': ['ramo31'],
-  'ramo38': ['ramo32'],
-  'ramo39': ['ramo33'],
-  'ramo40': ['ramo30'],
-  'ramo41': ['ramo35'],
+.año h2, .año h3 {
+  text-align: center;
+}
 
-  'ramo42': ['ramo40'],
-  'ramo43': ['ramo36', 'ramo37', 'ramo38'],
-  'ramo44': ['ramo37', 'ramo38'],
-  'ramo46': ['ramo43'],
-  'ramo47': ['ramo36', 'ramo38'],
-  'ramo48': ['ramo36', 'ramo38'],
-  'ramo49': ['ramo36', 'ramo38'],
-  'ramo50': ['ramo36', 'ramo38'],
-  'ramo51': ['ramo36', 'ramo38'],
-  'ramo52': ['ramo41']
-};
+.semestre {
+  margin-bottom: 10px;
+}
 
-window.addEventListener('DOMContentLoaded', () => {
-  const ramos = document.querySelectorAll('.ramo');
+.ramo {
+  background-color: #f8c9e8;
+  border: 1px solid #d38bb7;
+  border-radius: 5px;
+  padding: 6px 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  ramos.forEach(ramo => {
-    const id = ramo.id;
-    const reqs = requisitos[id];
+.ramo:hover {
+  background-color: #f2a6d8;
+}
 
-    if (reqs && reqs.length > 0) {
-      ramo.classList.add('bloqueado');
-    }
+.ramo.bloqueado {
+  background-color: #e0e0e0;
+  color: #aaa;
+  cursor: not-allowed;
+}
 
-    ramo.addEventListener('click', () => {
-      if (ramo.classList.contains('bloqueado') || ramo.classList.contains('aprobado')) return;
+.ramo.desbloqueado {
+  background-color: #f8c9e8;
+  cursor: pointer;
+}
 
-      // Marcar como aprobado solo una vez
-      ramo.classList.remove('bloqueado', 'desbloqueado');
-      ramo.classList.add('aprobado');
-
-      // Desbloquear los ramos dependientes
-      ramos.forEach(r => {
-        const rId = r.id;
-        const rReqs = requisitos[rId];
-
-        if (!rReqs || r.classList.contains('aprobado')) return;
-
-        const puedeDesbloquear = rReqs.every(reqId => {
-          const reqEl = document.getElementById(reqId);
-          return reqEl && reqEl.classList.contains('aprobado');
-        });
-
-        if (puedeDesbloquear) {
-          r.classList.remove('bloqueado');
-          r.classList.add('desbloqueado');
-        }
-      });
-    });
-  });
-});
+.ramo.aprobado {
+  background-color: #ff9ae3 !important;
+  font-style: italic;
+  text-decoration: line-through;
+  color: black;
+}
