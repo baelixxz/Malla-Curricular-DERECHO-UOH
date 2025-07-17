@@ -1,161 +1,152 @@
-// script.js
-
-// Lista completa de cursos con id, nombre, requisitos y año/semestre
 const cursos = [
-  // Primer Año
-  { id: "fund_privado", nombre: "Fundamentos de Derecho Privado", requisitos: [], año: 1, semestre: 1 },
-  { id: "fund_publico", nombre: "Fundamentos de Derecho Público", requisitos: [], año: 1, semestre: 1 },
-  { id: "historia", nombre: "Historia de las Ideas e Instituciones Jurídicas", requisitos: [], año: 1, semestre: 1 },
-  { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [], año: 1, semestre: 1 },
-  { id: "lenguaje", nombre: "Lenguaje del Derecho", requisitos: [], año: 1, semestre: 1 },
-  { id: "taller_oral", nombre: "Taller de Expresión Oral y Escrita", requisitos: [], año: 1, semestre: 1 },
-  { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [], año: 1, semestre: 2 },
-  { id: "criminologia", nombre: "Criminología y Política Criminal", requisitos: [], año: 1, semestre: 2 },
-  { id: "teoria_sistema", nombre: "Teoría del Sistema Jurídico", requisitos: [], año: 1, semestre: 2 },
-  { id: "metod_investigacion", nombre: "Metodología de la Investigación Jurídico-Social", requisitos: [], año: 1, semestre: 2 },
-  { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [], año: 1, semestre: 2 },
-  { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [], año: 1, semestre: 2 },
+  { id: "fund_privado", nombre: "Fundamentos de Derecho Privado", requisitos: [] },
+  { id: "fund_publico", nombre: "Fundamentos de Derecho Público", requisitos: [] },
+  { id: "historia", nombre: "Historia de las Ideas e Instituciones Jurídicas", requisitos: [] },
+  { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [] },
+  { id: "lenguaje", nombre: "Lenguaje del Derecho", requisitos: [] },
+  { id: "taller_oral", nombre: "Taller de Expresión Oral y Escrita", requisitos: [] },
 
-  // Segundo Año
-  { id: "constitucional1", nombre: "Constitucional I", requisitos: ["fund_publico"], año: 2, semestre: 3 },
-  { id: "privado1", nombre: "Privado I", requisitos: ["fund_privado"], año: 2, semestre: 3 },
-  { id: "penal1", nombre: "Penal I", requisitos: ["criminologia"], año: 2, semestre: 3 },
-  { id: "procesal1", nombre: "Procesal I", requisitos: ["teoria_sistema"], año: 2, semestre: 3 },
-  { id: "validez", nombre: "Validez Espacial y Temporal del Derecho", requisitos: [], año: 2, semestre: 3 },
-  { id: "ingles1", nombre: "Inglés I", requisitos: [], año: 2, semestre: 3 },
-  { id: "privado2", nombre: "Privado II", requisitos: ["privado1"], año: 2, semestre: 4 },
-  { id: "penal2", nombre: "Penal II", requisitos: ["penal1"], año: 2, semestre: 4 },
-  { id: "procesal2", nombre: "Procesal II", requisitos: ["procesal1"], año: 2, semestre: 4 },
-  { id: "constitucional2", nombre: "Constitucional II", requisitos: ["constitucional1"], año: 2, semestre: 4 },
-  { id: "internacional", nombre: "Internacional", requisitos: ["validez"], año: 2, semestre: 4 },
-  { id: "ingles2", nombre: "Inglés II", requisitos: ["ingles1"], año: 2, semestre: 4 },
+  { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [] },
+  { id: "criminologia", nombre: "Criminología y Política Criminal", requisitos: [] },
+  { id: "teoria_sistema", nombre: "Teoría del Sistema Jurídico", requisitos: [] },
+  { id: "metod_investigacion", nombre: "Metodología de la Investigación Jurídico-Social", requisitos: [] },
+  { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [] },
+  { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [] },
 
-  // Tercer Año
-  { id: "privado3", nombre: "Privado III", requisitos: ["privado2"], año: 3, semestre: 5 },
-  { id: "penal3", nombre: "Penal III", requisitos: ["penal2"], año: 3, semestre: 5 },
-  { id: "procesal3", nombre: "Procesal III", requisitos: ["procesal2"], año: 3, semestre: 5 },
-  { id: "administrativo1", nombre: "Administrativo", requisitos: ["constitucional2"], año: 3, semestre: 5 },
-  { id: "laboral1", nombre: "Laboral I", requisitos: [], año: 3, semestre: 5 },
-  { id: "ingles3", nombre: "Inglés III", requisitos: ["ingles2"], año: 3, semestre: 5 },
-  { id: "privado4", nombre: "Privado IV", requisitos: ["privado3"], año: 3, semestre: 6 },
-  { id: "penal4", nombre: "Penal IV", requisitos: ["penal3"], año: 3, semestre: 6 },
-  { id: "procesal4", nombre: "Procesal IV", requisitos: ["procesal3"], año: 3, semestre: 6 },
-  { id: "administrativo2", nombre: "Administrativo II", requisitos: ["constitucional2"], año: 3, semestre: 6 },
-  { id: "laboral2", nombre: "Laboral II", requisitos: ["laboral1"], año: 3, semestre: 6 },
-  { id: "ingles4", nombre: "Inglés IV", requisitos: ["ingles3"], año: 3, semestre: 6 },
+  { id: "constitucional1", nombre: "Constitucional I", requisitos: ["fund_publico"] },
+  { id: "privado1", nombre: "Privado I", requisitos: ["fund_privado"] },
+  { id: "penal1", nombre: "Penal I", requisitos: ["criminologia"] },
+  { id: "procesal1", nombre: "Procesal I", requisitos: ["teoria_sistema"] },
+  { id: "validez", nombre: "Validez Espacial y Temporal del Derecho", requisitos: [] },
+  { id: "ingles1", nombre: "Inglés I", requisitos: [] },
 
-  // Cuarto Año
-  { id: "privado5", nombre: "Privado V", requisitos: ["privado4"], año: 4, semestre: 7 },
-  { id: "procesal_penal", nombre: "Procesal Penal", requisitos: ["penal4"], año: 4, semestre: 7 },
-  { id: "procesal_especial", nombre: "Procesal Especial", requisitos: ["procesal4"], año: 4, semestre: 7 },
-  { id: "tributario", nombre: "Tributario", requisitos: ["administrativo2"], año: 4, semestre: 7 },
-  { id: "comercial1", nombre: "Comercial I", requisitos: ["privado4"], año: 4, semestre: 7 },
-  { id: "ingles5", nombre: "Inglés V", requisitos: ["ingles4"], año: 4, semestre: 7 },
-  { id: "comercial2", nombre: "Comercial II", requisitos: ["comercial1"], año: 4, semestre: 8 },
-  { id: "privado6", nombre: "Privado VI", requisitos: ["privado5"], año: 4, semestre: 8 },
-  { id: "clinica1", nombre: "Clínica Jurídica I", requisitos: ["privado5", "procesal_especial", "procesal_penal"], año: 4, semestre: 8 },
-  { id: "etica_prof", nombre: "Ética Profesional", requisitos: ["procesal_especial", "procesal_penal"], año: 4, semestre: 8 },
-  { id: "estrategias_litigacion", nombre: "Estrategias y Técnicas de Litigación", requisitos: [], año: 4, semestre: 8 },
+  { id: "privado2", nombre: "Privado II", requisitos: ["privado1"] },
+  { id: "penal2", nombre: "Penal II", requisitos: ["penal1"] },
+  { id: "procesal2", nombre: "Procesal II", requisitos: ["procesal1"] },
+  { id: "constitucional2", nombre: "Constitucional II", requisitos: ["constitucional1"] },
+  { id: "internacional", nombre: "Internacional", requisitos: ["validez"] },
+  { id: "ingles2", nombre: "Inglés II", requisitos: ["ingles1"] },
 
-  // Quinto Año
-  { id: "clinica2", nombre: "Clínica Jurídica II", requisitos: ["clinica1"], año: 5, semestre: 9 },
-  { id: "fund_bienes_personas", nombre: "Instituciones Fundamentales del Derecho Civil: Bienes y Personas", requisitos: ["privado6", "procesal_especial"], año: 5, semestre: 9 },
-  { id: "fund_fuentes_obligaciones", nombre: "Instituciones Fundamentales del Derecho Civil: Fuentes de las Obligaciones", requisitos: ["privado6", "procesal_especial"], año: 5, semestre: 9 },
-  { id: "fund_constitucional", nombre: "Instituciones Fundamentales del Derecho Constitucional", requisitos: ["privado6", "procesal_especial"], año: 5, semestre: 9 },
-  { id: "fund_procesal", nombre: "Instituciones Fundamentales del Derecho Procesal", requisitos: ["privado6", "procesal_especial"], año: 5, semestre: 9 },
-  { id: "resolucion_casos", nombre: "Resolución de Casos", requisitos: ["privado6", "procesal_especial"], año: 5, semestre: 9 },
-  { id: "ingles6", nombre: "Inglés VI", requisitos: ["ingles5"], año: 5, semestre: 9 },
+  { id: "privado3", nombre: "Privado III", requisitos: ["privado2"] },
+  { id: "penal3", nombre: "Penal III", requisitos: ["penal2"] },
+  { id: "procesal3", nombre: "Procesal III", requisitos: ["procesal2"] },
+  { id: "administrativo1", nombre: "Administrativo", requisitos: ["constitucional2"] },
+  { id: "laboral1", nombre: "Laboral I", requisitos: [] },
+  { id: "ingles3", nombre: "Inglés III", requisitos: ["ingles2"] },
+
+  { id: "privado4", nombre: "Privado IV", requisitos: ["privado3"] },
+  { id: "penal4", nombre: "Penal IV", requisitos: ["penal3"] },
+  { id: "procesal4", nombre: "Procesal IV", requisitos: ["procesal3"] },
+  { id: "administrativo2", nombre: "Administrativo II", requisitos: ["constitucional2"] },
+  { id: "laboral2", nombre: "Laboral II", requisitos: ["laboral1"] },
+  { id: "ingles4", nombre: "Inglés IV", requisitos: ["ingles3"] },
+
+  { id: "privado5", nombre: "Privado V", requisitos: ["privado4"] },
+  { id: "procesal_penal", nombre: "Procesal Penal", requisitos: ["penal4"] },
+  { id: "procesal_especial", nombre: "Procesal Especial", requisitos: ["procesal4"] },
+  { id: "tributario", nombre: "Tributario", requisitos: ["administrativo2"] },
+  { id: "comercial1", nombre: "Comercial I", requisitos: ["privado4"] },
+  { id: "ingles5", nombre: "Inglés V", requisitos: ["ingles4"] },
+
+  { id: "comercial2", nombre: "Comercial II", requisitos: ["comercial1"] },
+  { id: "privado6", nombre: "Privado VI", requisitos: ["privado5"] },
+  { id: "clinica1", nombre: "Clínica Jurídica I", requisitos: ["privado5","procesal_especial","procesal_penal"] },
+  { id: "etica_prof", nombre: "Ética Profesional", requisitos: ["procesal_especial","procesal_penal"] },
+  { id: "estrategias_litigacion", nombre: "Estrategias y Técnicas de Litigación", requisitos: [] },
+
+  { id: "clinica2", nombre: "Clínica Jurídica II", requisitos: ["clinica1"] },
+  { id: "fund_bienes_personas", nombre: "Instituciones Fundamentales del Derecho Civil: Bienes y Personas", requisitos: ["privado6","procesal_especial"] },
+  { id: "fund_fuentes_obligaciones", nombre: "Instituciones Fundamentales del Derecho Civil: Fuentes de las Obligaciones", requisitos: ["privado6","procesal_especial"] },
+  { id: "fund_constitucional", nombre: "Instituciones Fundamentales del Derecho Constitucional", requisitos: ["privado6","procesal_especial"] },
+  { id: "fund_procesal", nombre: "Instituciones Fundamentales del Derecho Procesal", requisitos: ["privado6","procesal_especial"] },
+  { id: "resolucion_casos", nombre: "Resolución de Casos", requisitos: ["privado6","procesal_especial"] },
+  { id: "ingles6", nombre: "Inglés VI", requisitos: ["ingles5"] },
 ];
 
-// Colores para cuando se apruebe el ramo (en orden)
-const coloresAprobado = ["#f70071", "#ff1b82", "#ff5aa4", "#ff96c5"];
+const aprobados = JSON.parse(localStorage.getItem('aprobados') || '{}');
 
-const malla = document.getElementById("malla");
-let aprobados = JSON.parse(localStorage.getItem("aprobados")) || {};
-
-// Para llevar el índice del color a usar
-let colorIndex = 0;
-
-// Función para verificar si se puede aprobar el ramo (todos requisitos aprobados + año desbloqueado)
 function puedeAprobar(id) {
   const curso = cursos.find(c => c.id === id);
   if (!curso) return false;
-
-  // Verificar si todos los requisitos están aprobados
-  const requisitosCumplidos = curso.requisitos.every(r => aprobados[r]);
-
-  // Verificar si el año está desbloqueado
-  if (curso.año === 1) return requisitosCumplidos; // Primer año siempre desbloqueado si requisitos
-
-  // Años posteriores: se desbloquea si se aprobaron TODOS los ramos del año anterior
-  const añoAnterior = curso.año - 1;
-  const ramosAñoAnterior = cursos.filter(c => c.año === añoAnterior);
-  const añoAnteriorCompleto = ramosAñoAnterior.every(r => aprobados[r.id]);
-
-  return requisitosCumplidos && añoAnteriorCompleto;
+  return curso.requisitos.every(r => aprobados[r]);
 }
 
-// Función para aprobar o desaprobar (toggle) el ramo
 function aprobar(id) {
   if (!puedeAprobar(id)) {
-    alert("Este ramo está bloqueado. Debes aprobar los requisitos y años anteriores primero.");
+    alert("Debes aprobar primero los requisitos para este ramo.");
     return;
   }
-  if (aprobados[id]) {
-    // Desaprobar
-    delete aprobados[id];
-  } else {
-    // Aprobar y asignar color siguiente
-    aprobados[id] = coloresAprobado[colorIndex];
-    colorIndex = (colorIndex + 1) % coloresAprobado.length;
-  }
-  localStorage.setItem("aprobados", JSON.stringify(aprobados));
+  aprobados[id] = true;
+  localStorage.setItem('aprobados', JSON.stringify(aprobados));
   actualizarVisual();
 }
 
-// Crear el DOM para cada ramo
-function crearRamo(curso) {
-  const div = document.createElement("div");
-  div.classList.add("ramo");
-  div.id = curso.id;
-  div.textContent = curso.nombre;
-
-  div.addEventListener("click", () => aprobar(curso.id));
-
-  malla.appendChild(div);
-}
-
-// Actualizar la vista visual de todos los ramos
 function actualizarVisual() {
   cursos.forEach(curso => {
-    const div = document.getElementById(curso.id);
-    if (!div) return;
+    const elem = document.getElementById(curso.id);
+    if (!elem) return;
 
     if (aprobados[curso.id]) {
-      div.style.backgroundColor = aprobados[curso.id];
-      div.style.color = "white";
-      div.style.fontStyle = "italic";
-      div.style.textDecoration = "line-through";
-      div.style.cursor = "default";
-      div.classList.remove("bloqueado");
+      elem.classList.add('aprobado');
+      elem.classList.remove('bloqueado');
     } else if (!puedeAprobar(curso.id)) {
-      div.style.backgroundColor = "#ffc0cb";
-      div.style.color = "#b55a70";
-      div.style.fontStyle = "normal";
-      div.style.textDecoration = "none";
-      div.style.cursor = "default";
-      div.classList.add("bloqueado");
+      elem.classList.add('bloqueado');
+      elem.classList.remove('aprobado');
     } else {
-      div.style.backgroundColor = "#ff96c5";
-      div.style.color = "#4b1c33";
-      div.style.fontStyle = "normal";
-      div.style.textDecoration = "none";
-      div.style.cursor = "pointer";
-      div.classList.remove("bloqueado");
+      elem.classList.remove('bloqueado', 'aprobado');
     }
   });
+
+  // Control para desbloquear años según avance:
+
+  // Verificar si primer y segundo año completos
+  const primerAnioIds = cursos.filter(c => c.id.startsWith('fund_') || c.id === 'historia' || c.id === 'sociologia' || c.id === 'lenguaje' || c.id === 'taller_oral' || 
+    ['derecho_economia', 'criminologia', 'teoria_sistema', 'metod_investigacion', 'tradiciones', 'razonamiento'].includes(c.id)
+  ).map(c => c.id);
+
+  const segundoAnioIds = ['constitucional1', 'privado1', 'penal1', 'procesal1', 'validez', 'ingles1', 'privado2', 'penal2', 'procesal2', 'constitucional2', 'internacional', 'ingles2'];
+
+  const primerYSegundoCompletos = primerAnioIds.every(id => aprobados[id]) && segundoAnioIds.every(id => aprobados[id]);
+
+  // Si no completo primero y segundo, bloquea tercero, cuarto y quinto
+  if (!primerYSegundoCompletos) {
+    // bloquea tercero, cuarto, quinto años
+    const idsBloquear = cursos.filter(c => !primerAnioIds.includes(c.id) && !segundoAnioIds.includes(c.id)).map(c => c.id);
+    idsBloquear.forEach(id => {
+      const elem = document.getElementById(id);
+      if (elem && !aprobados[id]) elem.classList.add('bloqueado');
+    });
+  } else {
+    // Desbloquea tercero y cuarto
+    const terceroCuarto = cursos.filter(c => ['privado3','penal3','procesal3','administrativo1','laboral1','ingles3',
+                                               'privado4','penal4','procesal4','administrativo2','laboral2','ingles4',
+                                               'privado5','procesal_penal','procesal_especial','tributario','comercial1','ingles5',
+                                               'comercial2','privado6','clinica1','etica_prof','estrategias_litigacion'].includes(c.id)).map(c => c.id);
+
+    terceroCuarto.forEach(id => {
+      const elem = document.getElementById(id);
+      if (elem && !aprobados[id]) elem.classList.remove('bloqueado');
+    });
+
+    // Requiere que tercero y cuarto completos para desbloquear quinto
+    const tercerYCuartoIds = terceroCuarto;
+    const quintoAnioIds = ['clinica2','fund_bienes_personas','fund_fuentes_obligaciones','fund_constitucional','fund_procesal','resolucion_casos','ingles6'];
+    const tercerYCuartoCompletos = tercerYCuartoIds.every(id => aprobados[id]);
+
+    if (!tercerYCuartoCompletos) {
+      quintoAnioIds.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem && !aprobados[id]) elem.classList.add('bloqueado');
+      });
+    } else {
+      quintoAnioIds.forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem && !aprobados[id]) elem.classList.remove('bloqueado');
+      });
+    }
+  }
 }
 
-// Crear todos los ramos inicialmente
-cursos.forEach(crearRamo);
-actualizarVisual();
+window.onload = () => {
+  actualizarVisual();
+};
