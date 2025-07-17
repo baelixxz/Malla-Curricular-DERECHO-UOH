@@ -1,8 +1,10 @@
-/* estilos.css */
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: 'Arial Nova Condensed', Arial, sans-serif;
-  font-size: 12pt;
   background: #fff0f5;
   color: #4b1c33;
   padding: 20px;
@@ -15,83 +17,97 @@ h1 {
   color: #7b1e3e;
 }
 
-#semestres-container {
+/* Contenedor años - flex para que se alineen horizontal */
+#contenedor-anos {
   display: flex;
   gap: 20px;
   justify-content: center;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px;
 }
 
-.semestre {
-  background: #ff96c5;
-  border: 2px solid #ff1b82;
+/* Cada año en columna vertical */
+.ano {
+  background: #ff96c5; /* rosa suave */
   border-radius: 12px;
-  padding: 15px;
-  min-width: 250px;
+  padding: 12px;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Título del año */
+.ano h2 {
+  color: #800000; /* burdeos oscuro */
+  text-align: center;
+  margin: 0 0 10px;
+  border-bottom: 2px solid #800000;
+  padding-bottom: 6px;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+/* Contenedor de semestres dentro del año */
+.semestres {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Cada semestre - bloque con título y ramos */
+.semestre {
+  background: #ff5aa4; /* rosa medio */
+  border-radius: 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 2px 2px 8px rgba(255, 27, 130, 0.3);
 }
 
-.semestre h2 {
-  margin-top: 0;
-  color: #ff1b82;
+/* Título semestre */
+.semestre h3 {
+  color: #800000;
+  margin: 0 0 6px;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.2rem;
+  border-bottom: 1px solid #800000;
+  padding-bottom: 4px;
 }
 
+/* Ramos dentro del semestre */
 .ramo {
-  background: #ffc0cb;
-  border: 2px solid #f70071;
+  background: #ff1b82; /* rosa fuerte */
+  border: 2px solid #800000;
   border-radius: 8px;
-  padding: 10px;
+  padding: 8px 12px;
   cursor: pointer;
   user-select: none;
+  color: white; /* texto blanco siempre */
   transition: background-color 0.3s ease, color 0.3s ease;
   text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
+/* Ramo bloqueado */
 .ramo.bloqueado {
   opacity: 0.5;
   cursor: default;
-  background: #ffd9e8;
-  border-color: #ff96c5;
-  color: #a36682;
-  font-style: normal;
-  text-decoration: none;
 }
 
+/* Ramo aprobado */
 .ramo.aprobado {
-  background: #f70071; /* primer color que me diste */
-  color: white;
+  background: #f70071; /* burdeos vivo */
   text-decoration: line-through;
   font-style: italic;
   cursor: default;
 }
 
-.ramo.aprobado:nth-child(1) {
-  background: #f70071; /* primer color */
-}
-
-.ramo.aprobado:nth-child(2) {
-  background: #ff1b82; /* segundo color */
-}
-
-.ramo.aprobado:nth-child(3) {
-  background: #ff5aa4; /* tercero */
-}
-
-.ramo.aprobado:nth-child(4) {
-  background: #ff96c5; /* cuarto */
-}
-
-/* Opcional: efecto hover para ramos desbloqueados */
-.ramo:not(.bloqueado):not(.aprobado):hover {
-  background: #ff5aa4;
-  color: #4b1c33;
-  font-weight: bold;
+/* Hover sólo en ramos desbloqueados y no aprobados */
+.ramo:hover:not(.bloqueado):not(.aprobado) {
+  background-color: #ff96c5;
 }
