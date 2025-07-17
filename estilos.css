@@ -1,8 +1,9 @@
-/* estilos.css */
+@import url('https://fonts.googleapis.com/css2?family=Arial+Nova+Condensed&display=swap');
 
 body {
   font-family: 'Arial Nova Condensed', Arial, sans-serif;
-  background: #fff0f5;
+  font-size: 12pt;
+  background-color: #D81B60;
   color: white;
   padding: 20px;
   margin: 0;
@@ -11,85 +12,119 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 2rem;
   color: white;
-  font-weight: bold;
-  font-size: 2.5rem;
 }
 
-#contenedor-anos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
+.contenedor-malla {
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-.anio {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  border: 2px solid #ff5aa4;
-  border-radius: 15px;
-  padding: 15px;
-  background: #ff96c5;
-  min-width: 280px;
-}
-
-.anio h2 {
-  text-align: center;
-  margin: 0 0 15px 0;
-  font-weight: 900;
-  font-size: 1.7rem;
-  color: white;
-  text-shadow: 1px 1px 3px #aa3d6a;
-}
-
-.semestre {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #ff1b82;
+/* Cada bloque (grupos de años) */
+.bloque-container {
+  background: rgba(255 255 255 / 0.1);
   border-radius: 12px;
-  padding: 10px;
-  background: #ff5aa4;
+  padding: 20px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
 }
 
-.semestre h3 {
-  margin: 0 0 10px 0;
-  font-weight: 700;
-  font-size: 1.3rem;
+.bloque-titulo {
+  font-weight: 900;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 16px;
+  border-bottom: 3px solid #ff96c5;
+  padding-bottom: 8px;
   color: white;
-  text-shadow: 1px 1px 2px #8a115c;
+  user-select: none;
 }
 
-.ramo {
-  background: #f70071;
+/* Los años dentro del bloque */
+.anio-container {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+/* Cada año */
+.anio {
+  background: rgba(255 255 255 / 0.15);
+  border-radius: 10px;
+  padding: 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: inset 0 0 8px rgba(255 255 255 / 0.2);
+}
+
+.anio-titulo {
+  font-weight: 800;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #ff5aa4;
+  padding-bottom: 6px;
+  color: white;
+  user-select: none;
+}
+
+/* Semestres dentro de año */
+.semestre {
+  background: rgba(255 255 255 / 0.2);
   border-radius: 8px;
-  margin: 5px 0;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.semestre-titulo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #ff5aa4;
+  padding-bottom: 4px;
+  user-select: none;
+}
+
+/* Ramos */
+.ramo {
+  background-color: #ff96c5;  /* rosa claro */
+  border: 2px solid #ff1b82; /* rosa fuerte */
+  border-radius: 6px;
+  padding: 10px;
+  text-align: center;
   cursor: pointer;
   user-select: none;
-  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
   color: white;
-  transition: background-color 0.3s ease, font-style 0.3s ease;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.ramo:hover:not(.bloqueado):not(.aprobado) {
+  background-color: #ff5aa4;
+  border-color: #f70071;
 }
 
 .ramo.bloqueado {
   opacity: 0.5;
   cursor: default;
-  background: #ff96c5;
-  color: #fce7f0;
-  font-style: normal;
 }
 
 .ramo.aprobado {
-  background: #800000;
+  background-color: #880E4F; /* burdeos vino */
+  color: white;
   text-decoration: line-through;
   font-style: italic;
-  color: #ff1b82;
-  font-weight: 700;
-}
-
-.ramo:hover:not(.bloqueado):not(.aprobado) {
-  background: #ff1b82;
+  cursor: default;
 }
