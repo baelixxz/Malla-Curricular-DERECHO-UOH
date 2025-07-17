@@ -1,97 +1,85 @@
-/* estilos.css */
-
 body {
-  font-family: "Arial Nova Cond", Arial, sans-serif;
+  font-family: "Arial Nova", Arial, sans-serif;
   background-color: #D81B60;
   color: white;
   padding: 20px;
   margin: 0;
 }
 
-h1, h2, h3 {
-  color: white;
-  margin: 0 0 10px 0;
-}
-
 h1 {
   text-align: center;
+  font-size: 28px;
+  color: white;
   margin-bottom: 30px;
-  font-weight: 700;
-  font-size: 2rem;
 }
 
-.container {
+.contenedor-anios {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+  gap: 30px;
+  margin-top: 20px;
 }
 
 .anio {
-  border: 2px solid white;
-  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #c2185b;
   padding: 20px;
-  min-width: 280px;
-  background: rgba(255 255 255 / 0.1);
-  box-sizing: border-box;
+  border-radius: 12px;
+  min-width: 300px;
+  max-width: 350px;
+}
+
+.anio h2 {
+  text-align: center;
+  font-size: 20px;
+  color: white;
+  margin: 0;
 }
 
 .semestre {
-  margin-top: 15px;
-  background: rgba(255 255 255 / 0.15);
-  padding: 15px;
-  border-radius: 10px;
+  background-color: #f06292;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .semestre h3 {
-  font-weight: 600;
-  margin-bottom: 12px;
-  font-size: 1.1rem;
-  border-bottom: 1px solid white;
-  padding-bottom: 6px;
-}
-
-.ramo {
-  background: #ff96c5;
-  border-radius: 8px;
-  margin: 6px 0;
-  padding: 10px 12px;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-size: 0.95rem;
-  font-weight: 600;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
   color: white;
 }
 
-.ramo.bloqueado {
-  background: #ff5aa4;
-  opacity: 0.5;
-  cursor: default;
-  text-decoration: none;
+.curso {
+  background-color: #ff96c5;
+  border-left: 6px solid white;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Arial Nova", Arial, sans-serif;
 }
 
-.ramo.aprobado {
-  background: #880e4f;
+.curso:hover {
+  background-color: #ff5aa4;
+}
+
+.curso.aprobado {
+  background-color: #f70071 !important;
   color: white;
   text-decoration: line-through;
   font-style: italic;
-  cursor: pointer;
+  cursor: default;
 }
 
-.ramo.aprobado:first-child {
-  color: #f70071; /* primer aprobado color rosa fuerte */
-}
-
-.ramo.aprobado:nth-child(2) {
-  color: #ff1b82; /* segundo aprobado */
-}
-
-.ramo.aprobado:nth-child(3) {
-  color: #ff5aa4; /* tercero */
-}
-
-.ramo.aprobado:nth-child(4) {
-  color: #ff96c5; /* cuarto */
+.curso.bloqueado {
+  background-color: #bdbdbd;
+  color: #eee;
+  cursor: default;
+  opacity: 0.5;
 }
