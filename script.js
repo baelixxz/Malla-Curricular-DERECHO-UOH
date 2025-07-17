@@ -1,84 +1,112 @@
+// Mapa de requisitos por ramo (id) con sus requisitos
 const requisitos = {
-  'ramo13': ['ramo2'],
-  'ramo14': ['ramo8'],
-  'ramo15': ['ramo9'],
-  'ramo16': ['ramo3'],
-  'ramo17': ['ramo12'],
+  // Primer año sin requisitos
+  "fund_privado": [],
+  "fund_publico": [],
+  "historia": [],
+  "sociologia": [],
+  "lenguaje": [],
+  "taller_oral": [],
 
-  'ramo18': ['ramo13'],
-  'ramo19': ['ramo14'],
-  'ramo20': ['ramo15'],
-  'ramo21': ['ramo16'],
-  'ramo22': ['ramo10'],
-  'ramo23': ['ramo17'],
+  "derecho_economia": [],
+  "criminologia": [],
+  "teoria_sistema": [],
+  "metod_investigacion": [],
+  "tradiciones": [],
+  "razonamiento": [],
 
-  'ramo24': ['ramo18'],
-  'ramo25': ['ramo19'],
-  'ramo26': ['ramo20'],
-  'ramo27': ['ramo21'],
-  'ramo29': ['ramo23'],
+  // Segundo Año
+  "constitucional1": ["fund_publico"],
+  "privado1": ["fund_privado"],
+  "penal1": ["criminologia"],
+  "procesal1": ["teoria_sistema"],
+  "validez": [],
+  "ingles1": [],
 
-  'ramo30': ['ramo24'],
-  'ramo31': ['ramo25'],
-  'ramo32': ['ramo26'],
-  'ramo33': ['ramo21'],
-  'ramo34': ['ramo28'],
-  'ramo35': ['ramo29'],
+  "privado2": ["privado1"],
+  "penal2": ["penal1"],
+  "procesal2": ["procesal1"],
+  "constitucional2": ["constitucional1"],
+  "internacional": ["validez"],
+  "ingles2": ["ingles1"],
 
-  'ramo36': ['ramo30'],
-  'ramo37': ['ramo31'],
-  'ramo38': ['ramo32'],
-  'ramo39': ['ramo33'],
-  'ramo40': ['ramo30'],
-  'ramo41': ['ramo35'],
+  // Tercer Año
+  "privado3": ["privado2"],
+  "penal3": ["penal2"],
+  "procesal3": ["procesal2"],
+  "administrativo1": ["constitucional2"],
+  "laboral1": [],
+  "ingles3": ["ingles2"],
 
-  'ramo42': ['ramo40'],
-  'ramo43': ['ramo36', 'ramo37', 'ramo38'],
-  'ramo44': ['ramo37', 'ramo38'],
-  'ramo46': ['ramo43'],
-  'ramo47': ['ramo36', 'ramo38'],
-  'ramo48': ['ramo36', 'ramo38'],
-  'ramo49': ['ramo36', 'ramo38'],
-  'ramo50': ['ramo36', 'ramo38'],
-  'ramo51': ['ramo36', 'ramo38'],
-  'ramo52': ['ramo41']
+  "privado4": ["privado3"],
+  "penal4": ["penal3"],
+  "procesal4": ["procesal3"],
+  "administrativo2": ["constitucional2"],
+  "laboral2": ["laboral1"],
+  "ingles4": ["ingles3"],
+
+  // Cuarto Año
+  "privado5": ["privado4"],
+  "procesal_penal": ["penal4"],
+  "procesal_especial": ["procesal4"],
+  "tributario": ["administrativo2"],
+  "comercial1": ["privado4"],
+  "ingles5": ["ingles4"],
+
+  "comercial2": ["comercial1"],
+  "privado6": ["privado5"],
+  "clinica1": ["privado5", "procesal_especial", "procesal_penal"],
+  "etica_prof": ["procesal_especial", "procesal_penal"],
+  "estrategias_litigacion": [],
+
+  // Quinto Año
+  "clinica2": ["clinica1"],
+  "fund_bienes_personas": ["privado6", "procesal_especial"],
+  "fund_fuentes_obligaciones": ["privado6", "procesal_especial"],
+  "fund_constitucional": ["privado6", "procesal_especial"],
+  "fund_procesal": ["privado6", "procesal_especial"],
+  "resolucion_casos": ["privado6", "procesal_especial"],
+  "ingles6": ["ingles5"],
 };
 
-window.addEventListener('DOMContentLoaded', () => {
-  const ramos = document.querySelectorAll('.ramo');
+// Guarda los ramos aprobados
+const aprobados = new Set();
 
-  ramos.forEach(ramo => {
-    const id = ramo.id;
-    const reqs = requisitos[id];
+function puedeAprobar(id) {
+  const reqs = requisitos[id] || [];
+  // Un ramo sin requisitos siempre puede aprobarse
+  if (reqs.length === 0) return true;
+  // Todos los requisitos deben estar aprobados
+  return reqs.every(r => aprobados.has(r));
+}
 
-    if (reqs && reqs.length > 0) {
-      ramo.classList.add('bloqueado');
+function aprobar(div) {
+  const id = div.id;
+  if (!puedeAprobar(id)) {
+    alert("Debes aprobar primero los ramos requisito para desbloquear este ramo.");
+    return;
+  }
+  if (aprobados.has(id)) return; // ya aprobado
+
+  aprobados.add(id);
+  actualizarVisual();
+}
+
+function actualizarVisual() {
+  document.querySelectorAll(".ramo").forEach(div => {
+    const id = div.id;
+    if (aprobados.has(id)) {
+      div.classList.add("aprobado");
+      div.classList.remove("bloqueado");
+    } else if (!puedeAprobar(id)) {
+      div.classList.add("bloqueado");
+      div.classList.remove("aprobado");
+    } else {
+      div.classList.remove("bloqueado", "aprobado");
     }
-
-    ramo.addEventListener('click', () => {
-      if (ramo.classList.contains('bloqueado') || ramo.classList.contains('aprobado')) return;
-
-      // Aprobado y mantener estilo
-      ramo.classList.remove('bloqueado', 'desbloqueado');
-      ramo.classList.add('aprobado');
-
-      // Desbloquear dependientes
-      ramos.forEach(r => {
-        const rId = r.id;
-        const rReqs = requisitos[rId];
-
-        if (!rReqs || r.classList.contains('aprobado')) return;
-
-        const puedeDesbloquear = rReqs.every(reqId => {
-          const reqEl = document.getElementById(reqId);
-          return reqEl && reqEl.classList.contains('aprobado');
-        });
-
-        if (puedeDesbloquear) {
-          r.classList.remove('bloqueado');
-          r.classList.add('desbloqueado');
-        }
-      });
-    });
   });
-});
+}
+
+// Inicia la visualización
+actualizarVisual();
+
