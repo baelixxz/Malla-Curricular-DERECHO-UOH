@@ -1,4 +1,3 @@
-// Diccionario de requisitos por ID
 const requisitos = {
   'ramo13': ['ramo2'],
   'ramo14': ['ramo8'],
@@ -45,7 +44,6 @@ const requisitos = {
   'ramo52': ['ramo41']
 };
 
-// Al cargar la página, inicializa los ramos
 window.addEventListener('DOMContentLoaded', () => {
   const ramos = document.querySelectorAll('.ramo');
 
@@ -60,21 +58,25 @@ window.addEventListener('DOMContentLoaded', () => {
     ramo.addEventListener('click', () => {
       if (ramo.classList.contains('bloqueado') || ramo.classList.contains('aprobado')) return;
 
+      // Marcar como aprobado
       ramo.classList.add('aprobado');
+      ramo.style.backgroundColor = '#ff9ae3';
+      ramo.style.fontStyle = 'italic';
+      ramo.style.textDecoration = 'line-through';
 
-      // Desbloquear otros ramos si sus requisitos ahora están aprobados
+      // Desbloquear los que dependan de este
       ramos.forEach(r => {
         const rId = r.id;
         const rReqs = requisitos[rId];
 
         if (!rReqs || r.classList.contains('aprobado')) return;
 
-        const desbloquear = rReqs.every(reqId => {
-          const reqElement = document.getElementById(reqId);
-          return reqElement && reqElement.classList.contains('aprobado');
+        const puedeDesbloquear = rReqs.every(reqId => {
+          const reqEl = document.getElementById(reqId);
+          return reqEl && reqEl.classList.contains('aprobado');
         });
 
-        if (desbloquear) {
+        if (puedeDesbloquear) {
           r.classList.remove('bloqueado');
           r.classList.add('desbloqueado');
         }
