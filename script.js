@@ -58,13 +58,11 @@ window.addEventListener('DOMContentLoaded', () => {
     ramo.addEventListener('click', () => {
       if (ramo.classList.contains('bloqueado') || ramo.classList.contains('aprobado')) return;
 
-      // Marcar como aprobado
+      // Aprobado y mantener estilo
+      ramo.classList.remove('bloqueado', 'desbloqueado');
       ramo.classList.add('aprobado');
-      ramo.style.backgroundColor = '#ff9ae3';
-      ramo.style.fontStyle = 'italic';
-      ramo.style.textDecoration = 'line-through';
 
-      // Desbloquear los que dependan de este
+      // Desbloquear dependientes
       ramos.forEach(r => {
         const rId = r.id;
         const rReqs = requisitos[rId];
