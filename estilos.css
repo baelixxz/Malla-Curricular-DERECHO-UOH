@@ -1,70 +1,91 @@
+/* styles.css */
+
 body {
-  font-family: 'Arial Nova', sans-serif;
-  font-size: 12pt;
   margin: 0;
+  padding: 20px;
+  font-family: 'Arial Nova', Arial, sans-serif;
   background-color: #D81B60;
   color: white;
 }
 
 h1 {
   text-align: center;
-  padding: 20px;
-  margin: 0;
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 28px;
 }
 
-.main-container {
+.malla {
   display: flex;
-  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: nowrap;
   overflow-x: auto;
-  padding: 20px;
-  gap: 20px;
+  padding-bottom: 10px;
 }
 
-.año {
-  flex: 0 0 auto;
-  background-color: white;
-  color: black;
+.anio {
+  background-color: #880e4f; /* tono oscuro para cada bloque año */
   border-radius: 10px;
-  padding: 10px;
-  width: 250px;
+  padding: 15px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
-.año h2, .año h3 {
+.anio h2 {
+  margin: 0 0 10px 0;
+  font-size: 22px;
   text-align: center;
+  font-weight: 700;
 }
 
 .semestre {
-  margin-bottom: 10px;
+  background-color: #b71c4a; /* color intermedio para semestres */
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.semestre h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
 }
 
 .ramo {
-  background-color: #f8c9e8;
-  border: 1px solid #d38bb7;
-  border-radius: 5px;
-  padding: 6px 10px;
-  margin: 5px 0;
+  background-color: #ff5aa4; /* color base para ramos desbloqueados */
+  border-radius: 6px;
+  padding: 8px 10px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  user-select: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-align: center;
 }
 
-.ramo:hover {
-  background-color: #f2a6d8;
-}
-
-.ramo.bloqueado {
-  background-color: #e0e0e0;
-  color: #aaa;
-  cursor: not-allowed;
-}
-
-.ramo.desbloqueado {
-  background-color: #f8c9e8;
-  cursor: pointer;
+.ramo:hover:not(.aprobado):not(.bloqueado) {
+  background-color: #ff96c5;
 }
 
 .ramo.aprobado {
-  background-color: #ff9ae3 !important;
+  background-color: #ff9ae3 !important; /* color fijo para aprobado */
   font-style: italic;
+  cursor: default;
   text-decoration: line-through;
-  color: black;
+  color: white;
 }
+
+.ramo.bloqueado {
+  background-color: #5a0835;
+  cursor: not-allowed;
+  opacity: 0.6;
+  text-decoration: none;
+}
+
