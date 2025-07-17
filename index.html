@@ -1,19 +1,225 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Malla Curricular Interactiva</title>
-  <link rel="stylesheet" href="estilos.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Malla Curricular Derecho - Interactiva</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Arial+Nova+Condensed&display=swap');
+
+  body {
+    font-family: "Arial Nova Condensed", Arial, sans-serif;
+    font-size: 12pt;
+    color: white;
+    background: #fff0f5;
+    padding: 20px;
+    margin: 0;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+  }
+
+  #malla {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  .anio {
+    background: #ff96c5;
+    border: 2px solid #800000;
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .anio h2 {
+    margin: 0 0 15px 0;
+    text-align: center;
+  }
+
+  .semestre {
+    background: #ff5aa4;
+    border-radius: 8px;
+    padding: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .semestre h3 {
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .ramo {
+    background: #ff1b82;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, font-style 0.3s ease;
+  }
+
+  .ramo.bloqueado {
+    opacity: 0.5;
+    cursor: default;
+    background-color: #f70071;
+  }
+
+  .ramo.aprobado {
+    background-color: #800000;
+    color: white;
+    text-decoration: line-through;
+    font-style: italic;
+  }
+</style>
 </head>
 <body>
 
-  <h1>Malla Curricular Derecho - Interactiva</h1>
+<h1>Malla Curricular Derecho - Interactiva</h1>
 
-  <div id="contenedor-anos">
-    <!-- Aquí se inyectan años, semestres y ramos desde script.js -->
-  </div>
+<div id="malla">
+  <!-- Aquí se agregan años y semestres -->
+</div>
 
-  <script src="script.js"></script>
+<script>
+  const cursos = [
+    { id: "fund_privado", nombre: "Fundamentos de Derecho Privado", requisitos: [], anio: 1, semestre: 1 },
+    { id: "fund_publico", nombre: "Fundamentos de Derecho Público", requisitos: [], anio: 1, semestre: 1 },
+    { id: "historia", nombre: "Historia de las Ideas e Instituciones Jurídicas", requisitos: [], anio: 1, semestre: 1 },
+    { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [], anio: 1, semestre: 1 },
+    { id: "lenguaje", nombre: "Lenguaje del Derecho", requisitos: [], anio: 1, semestre: 1 },
+    { id: "taller_oral", nombre: "Taller de Expresión Oral y Escrita", requisitos: [], anio: 1, semestre: 1 },
+
+    { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [], anio: 1, semestre: 2 },
+    { id: "criminologia", nombre: "Criminología y Política Criminal", requisitos: [], anio: 1, semestre: 2 },
+    { id: "teoria_sistema", nombre: "Teoría del Sistema Jurídico", requisitos: [], anio: 1, semestre: 2 },
+    { id: "metod_investigacion", nombre: "Metodología de la Investigación Jurídico-Social", requisitos: [], anio: 1, semestre: 2 },
+    { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [], anio: 1, semestre: 2 },
+    { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [], anio: 1, semestre: 2 },
+
+    { id: "constitucional1", nombre: "Constitucional I", requisitos: ["fund_publico"], anio: 2, semestre: 3 },
+    { id: "privado1", nombre: "Privado I", requisitos: ["fund_privado"], anio: 2, semestre: 3 },
+    { id: "penal1", nombre: "Penal I", requisitos: ["criminologia"], anio: 2, semestre: 3 },
+    { id: "procesal1", nombre: "Procesal I", requisitos: ["teoria_sistema"], anio: 2, semestre: 3 },
+    { id: "validez", nombre: "Validez Espacial y Temporal del Derecho", requisitos: [], anio: 2, semestre: 3 },
+    { id: "ingles1", nombre: "Inglés I", requisitos: [], anio: 2, semestre: 3 },
+
+    { id: "privado2", nombre: "Privado II", requisitos: ["privado1"], anio: 2, semestre: 4 },
+    { id: "penal2", nombre: "Penal II", requisitos: ["penal1"], anio: 2, semestre: 4 },
+    { id: "procesal2", nombre: "Procesal II", requisitos: ["procesal1"], anio: 2, semestre: 4 },
+    { id: "constitucional2", nombre: "Constitucional II", requisitos: ["constitucional1"], anio: 2, semestre: 4 },
+    { id: "internacional", nombre: "Internacional", requisitos: ["validez"], anio: 2, semestre: 4 },
+    { id: "ingles2", nombre: "Inglés II", requisitos: ["ingles1"], anio: 2, semestre: 4 },
+
+    { id: "privado3", nombre: "Privado III", requisitos: ["privado2"], anio: 3, semestre: 5 },
+    { id: "penal3", nombre: "Penal III", requisitos: ["penal2"], anio: 3, semestre: 5 },
+    { id: "procesal3", nombre: "Procesal III", requisitos: ["procesal2"], anio: 3, semestre: 5 },
+    { id: "administrativo1", nombre: "Administrativo", requisitos: ["constitucional2"], anio: 3, semestre: 5 },
+    { id: "laboral1", nombre: "Laboral I", requisitos: [], anio: 3, semestre: 5 },
+    { id: "ingles3", nombre: "Inglés III", requisitos: ["ingles2"], anio: 3, semestre: 5 },
+
+    // Puedes seguir agregando cursos aquí de más años y semestres según tu lista
+  ];
+
+  const malla = document.getElementById("malla");
+  const aprobados = {};
+
+  // Crear estructura años > semestres > cursos
+  function renderMalla() {
+    // Agrupar cursos por año y semestre
+    const estructura = {};
+    cursos.forEach(c => {
+      if (!estructura[c.anio]) estructura[c.anio] = {};
+      if (!estructura[c.anio][c.semestre]) estructura[c.anio][c.semestre] = [];
+      estructura[c.anio][c.semestre].push(c);
+    });
+
+    // Limpiar
+    malla.innerHTML = "";
+
+    // Para cada año crear columna
+    Object.keys(estructura).sort((a,b) => a-b).forEach(anio => {
+      const divAnio = document.createElement("div");
+      divAnio.classList.add("anio");
+      divAnio.innerHTML = `<h2>Año ${anio}</h2>`;
+
+      // Semestres ordenados por número
+      Object.keys(estructura[anio]).sort((a,b) => a-b).forEach(semestre => {
+        const divSem = document.createElement("div");
+        divSem.classList.add("semestre");
+        divSem.innerHTML = `<h3>Semestre ${semestre}</h3>`;
+
+        estructura[anio][semestre].forEach(curso => {
+          const divRamo = document.createElement("div");
+          divRamo.classList.add("ramo");
+          divRamo.id = curso.id;
+          divRamo.textContent = curso.nombre;
+
+          divRamo.onclick = () => toggleAprobar(curso.id);
+
+          divSem.appendChild(divRamo);
+        });
+
+        divAnio.appendChild(divSem);
+      });
+
+      malla.appendChild(divAnio);
+    });
+  }
+
+  function puedeAprobar(id) {
+    const curso = cursos.find(c => c.id === id);
+    if (!curso) return false;
+    return curso.requisitos.every(r => aprobados[r]);
+  }
+
+  function toggleAprobar(id) {
+    if (aprobados[id]) {
+      // Retroceder: quitar aprobación
+      aprobados[id] = false;
+    } else {
+      if (!puedeAprobar(id)) {
+        alert("Este ramo está bloqueado. Debes aprobar los requisitos primero.");
+        return;
+      }
+      aprobados[id] = true;
+    }
+    actualizarVisual();
+  }
+
+  function actualizarVisual() {
+    cursos.forEach(curso => {
+      const div = document.getElementById(curso.id);
+      if (!div) return;
+      if (aprobados[curso.id]) {
+        div.classList.add("aprobado");
+        div.classList.remove("bloqueado");
+      } else if (!puedeAprobar(curso.id)) {
+        div.classList.add("bloqueado");
+        div.classList.remove("aprobado");
+      } else {
+        div.classList.remove("bloqueado", "aprobado");
+      }
+    });
+  }
+
+  renderMalla();
+  actualizarVisual();
+
+</script>
 </body>
 </html>
