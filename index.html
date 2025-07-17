@@ -1,129 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<title>Malla Curricular Prueba</title>
-<style>
-  body {
-    font-family: "Arial Nova Cond", Arial, sans-serif;
-    background-color: #D81B60;
-    color: white;
-    padding: 20px;
-    margin: 0;
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  .container {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .grupo-anos {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  .anio {
-    border: 2px solid white;
-    border-radius: 12px;
-    padding: 20px;
-    min-width: 280px;
-    background: rgba(255 255 255 / 0.1);
-  }
-  .semestre {
-    margin-top: 15px;
-    background: rgba(255 255 255 / 0.15);
-    padding: 15px;
-    border-radius: 10px;
-  }
-  .semestre h3 {
-    font-weight: 600;
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-    border-bottom: 1px solid white;
-    padding-bottom: 6px;
-  }
-  .ramo {
-    background: #ff96c5;
-    border-radius: 8px;
-    margin: 6px 0;
-    padding: 10px 12px;
-    font-weight: 600;
-    color: white;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>Malla Curricular Derecho UOH</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <h1>Malla Curricular Prueba</h1>
+  <h1>Malla Curricular Derecho UOH</h1>
   <div class="container">
-    <!-- Grupo primer y segundo año -->
+    <!-- Primer y Segundo Año -->
     <div class="grupo-anos">
       <div class="anio">
         <h2>Primer Año</h2>
         <div class="semestre">
           <h3>I Semestre</h3>
-          <div class="ramo">Fundamentos de Derecho Privado</div>
-          <div class="ramo">Fundamentos de Derecho Público</div>
+          <div class="ramo" onclick="aprobar(this)">Fundamentos de Derecho Privado</div>
+          <div class="ramo" onclick="aprobar(this)">Fundamentos de Derecho Público</div>
         </div>
         <div class="semestre">
           <h3>II Semestre</h3>
-          <div class="ramo">Derecho y Economía</div>
-          <div class="ramo">Criminología y Política Criminal</div>
+          <div class="ramo" onclick="aprobar(this)">Derecho y Economía</div>
+          <div class="ramo" onclick="aprobar(this)">Criminología y Política Criminal</div>
         </div>
       </div>
       <div class="anio">
         <h2>Segundo Año</h2>
         <div class="semestre">
           <h3>III Semestre</h3>
-          <div class="ramo">Constitucional I</div>
-          <div class="ramo">Privado I</div>
+          <div class="ramo" onclick="aprobar(this)">Constitucional I</div>
+          <div class="ramo" onclick="aprobar(this)">Privado I</div>
         </div>
         <div class="semestre">
           <h3>IV Semestre</h3>
-          <div class="ramo">Privado II</div>
-          <div class="ramo">Penal II</div>
+          <div class="ramo" onclick="aprobar(this)">Privado II</div>
+          <div class="ramo" onclick="aprobar(this)">Penal II</div>
         </div>
       </div>
     </div>
 
-    <!-- Grupo tercero, cuarto y quinto año -->
+    <!-- Tercer, Cuarto y Quinto Año -->
     <div class="grupo-anos">
       <div class="anio">
         <h2>Tercer Año</h2>
         <div class="semestre">
           <h3>V Semestre</h3>
-          <div class="ramo">Privado III</div>
-          <div class="ramo">Penal III</div>
+          <div class="ramo" onclick="aprobar(this)">Privado III</div>
+          <div class="ramo" onclick="aprobar(this)">Penal III</div>
         </div>
         <div class="semestre">
           <h3>VI Semestre</h3>
-          <div class="ramo">Privado IV</div>
-          <div class="ramo">Penal IV</div>
+          <div class="ramo" onclick="aprobar(this)">Privado IV</div>
+          <div class="ramo" onclick="aprobar(this)">Penal IV</div>
         </div>
       </div>
       <div class="anio">
         <h2>Cuarto Año</h2>
         <div class="semestre">
           <h3>VII Semestre</h3>
-          <div class="ramo">Privado V</div>
-          <div class="ramo">Procesal Penal</div>
+          <div class="ramo" onclick="aprobar(this)">Privado V</div>
+          <div class="ramo" onclick="aprobar(this)">Procesal Penal</div>
         </div>
         <div class="semestre">
           <h3>VIII Semestre</h3>
-          <div class="ramo">Comercial II</div>
-          <div class="ramo">Privado VI</div>
+          <div class="ramo" onclick="aprobar(this)">Comercial II</div>
+          <div class="ramo" onclick="aprobar(this)">Privado VI</div>
         </div>
       </div>
       <div class="anio">
         <h2>Quinto Año</h2>
         <div class="semestre">
           <h3>IX Semestre</h3>
-          <div class="ramo">Clínica Jurídica II</div>
-          <div class="ramo">Instituciones Fundamentales del Derecho Civil</div>
+          <div class="ramo" onclick="aprobar(this)">Clínica Jurídica II</div>
+          <div class="ramo" onclick="aprobar(this)">Instituciones Fundamentales del Derecho Civil</div>
         </div>
       </div>
     </div>
