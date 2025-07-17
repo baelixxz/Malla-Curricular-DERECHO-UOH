@@ -1,142 +1,337 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Malla Curricular Derecho UOH</title>
-  <link rel="stylesheet" href="estilos.css" />
+<meta charset="UTF-8" />
+<title>Malla Curricular Derecho UOH</title>
+<style>
+  /* Reset y base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Arial Nova Condensed', Arial, sans-serif;
+    background-color: #D81B60;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 700;
+  }
+
+  .malla {
+    display: flex;
+    gap: 30px;
+    padding: 10px 30px;
+    overflow-x: auto;
+    max-width: 100vw;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #ff5aa4 #d81b60;
+  }
+  .malla::-webkit-scrollbar {
+    height: 8px;
+  }
+  .malla::-webkit-scrollbar-track {
+    background: #d81b60;
+  }
+  .malla::-webkit-scrollbar-thumb {
+    background-color: #ff5aa4;
+    border-radius: 4px;
+  }
+
+  .anio {
+    background-color: #ff1b82;
+    padding: 20px;
+    border-radius: 12px;
+    min-width: 320px;
+    flex-shrink: 0;
+    scroll-margin-left: 30px;
+  }
+  .anio h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid white;
+    padding-bottom: 8px;
+  }
+
+  .semestre {
+    margin-bottom: 20px;
+  }
+  .semestre h3 {
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-bottom: 1px solid white;
+    padding-bottom: 4px;
+  }
+
+  .ramo {
+    background-color: #ff96c5;
+    margin: 6px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    font-style: normal;
+  }
+  .ramo.bloqueado {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .ramo.aprobado {
+    background-color: #800000;
+    color: white;
+    text-decoration: line-through;
+    font-style: italic;
+    cursor: default;
+  }
+  .ramo.aprobado.color1 {
+    background-color: #f70071;
+  }
+  .ramo.aprobado.color2 {
+    background-color: #ff1b82;
+  }
+  .ramo.aprobado.color3 {
+    background-color: #ff5aa4;
+  }
+  .ramo.aprobado.color4 {
+    background-color: #ff96c5;
+  }
+
+</style>
 </head>
 <body>
-  <h1>Malla Curricular Derecho UOH</h1>
 
-  <div class="malla">
+<h1>Malla Curricular Derecho UOH</h1>
 
-    <!-- Primer Año -->
-    <div class="bloque-anios">
-      <div class="anio">
-        <h2>Primer Año</h2>
+<div class="malla" id="malla">
 
-        <div class="semestre">
-          <h3>I Semestre</h3>
-          <div class="ramo" id="fund_privado" onclick="aprobar(this)">Fundamentos de Derecho Privado</div>
-          <div class="ramo" id="fund_publico" onclick="aprobar(this)">Fundamentos de Derecho Público</div>
-          <div class="ramo" id="historia" onclick="aprobar(this)">Historia de las Ideas e Instituciones Jurídicas</div>
-          <div class="ramo" id="sociologia" onclick="aprobar(this)">Sociología Jurídica</div>
-          <div class="ramo" id="lenguaje" onclick="aprobar(this)">Lenguaje del Derecho</div>
-          <div class="ramo" id="taller_oral" onclick="aprobar(this)">Taller de Expresión Oral y Escrita</div>
-        </div>
+  <div class="anio" id="anio1">
+    <h2>Primer Año</h2>
 
-        <div class="semestre">
-          <h3>II Semestre</h3>
-          <div class="ramo" id="derecho_economia" onclick="aprobar(this)">Derecho y Economía</div>
-          <div class="ramo" id="criminologia" onclick="aprobar(this)">Criminología y Política Criminal</div>
-          <div class="ramo" id="teoria_sistema" onclick="aprobar(this)">Teoría del Sistema Jurídico</div>
-          <div class="ramo" id="metod_investigacion" onclick="aprobar(this)">Metodología de la Investigación Jurídico-Social</div>
-          <div class="ramo" id="tradiciones" onclick="aprobar(this)">Tradiciones Jurídicas Comparadas</div>
-          <div class="ramo" id="razonamiento" onclick="aprobar(this)">Razonamiento Jurídico</div>
-        </div>
-      </div>
+    <div class="semestre">
+      <h3>Semestre I</h3>
+      <div class="ramo" id="fund_privado">Fundamentos de Derecho Privado</div>
+      <div class="ramo" id="fund_publico">Fundamentos de Derecho Público</div>
+      <div class="ramo" id="historia">Historia de las Ideas e Instituciones Jurídicas</div>
+      <div class="ramo" id="sociologia">Sociología Jurídica</div>
+      <div class="ramo" id="lenguaje">Lenguaje del Derecho</div>
+      <div class="ramo" id="taller_oral">Taller de Expresión Oral y Escrita</div>
     </div>
 
-    <!-- Segundo Año -->
-    <div class="bloque-anios">
-      <div class="anio">
-        <h2>Segundo Año</h2>
-
-        <div class="semestre">
-          <h3>III Semestre</h3>
-          <div class="ramo" id="constitucional1" onclick="aprobar(this)">Constitucional I</div>
-          <div class="ramo" id="privado1" onclick="aprobar(this)">Privado I</div>
-          <div class="ramo" id="penal1" onclick="aprobar(this)">Penal I</div>
-          <div class="ramo" id="procesal1" onclick="aprobar(this)">Procesal I</div>
-          <div class="ramo" id="validez" onclick="aprobar(this)">Validez Espacial y Temporal del Derecho</div>
-          <div class="ramo" id="ingles1" onclick="aprobar(this)">Inglés I</div>
-        </div>
-
-        <div class="semestre">
-          <h3>IV Semestre</h3>
-          <div class="ramo" id="privado2" onclick="aprobar(this)">Privado II</div>
-          <div class="ramo" id="penal2" onclick="aprobar(this)">Penal II</div>
-          <div class="ramo" id="procesal2" onclick="aprobar(this)">Procesal II</div>
-          <div class="ramo" id="constitucional2" onclick="aprobar(this)">Constitucional II</div>
-          <div class="ramo" id="internacional" onclick="aprobar(this)">Internacional</div>
-          <div class="ramo" id="ingles2" onclick="aprobar(this)">Inglés II</div>
-        </div>
-      </div>
+    <div class="semestre">
+      <h3>Semestre II</h3>
+      <div class="ramo" id="derecho_economia">Derecho y Economía</div>
+      <div class="ramo" id="criminologia">Criminología y Política Criminal</div>
+      <div class="ramo" id="teoria_sistema">Teoría del Sistema Jurídico</div>
+      <div class="ramo" id="metod_investigacion">Metodología de la Investigación Jurídico-Social</div>
+      <div class="ramo" id="tradiciones">Tradiciones Jurídicas Comparadas</div>
+      <div class="ramo" id="razonamiento">Razonamiento Jurídico</div>
     </div>
-
-    <!-- Tercer Año -->
-    <div class="bloque-anios">
-      <div class="anio">
-        <h2>Tercer Año</h2>
-
-        <div class="semestre">
-          <h3>V Semestre</h3>
-          <div class="ramo" id="privado3" onclick="aprobar(this)">Privado III</div>
-          <div class="ramo" id="penal3" onclick="aprobar(this)">Penal III</div>
-          <div class="ramo" id="procesal3" onclick="aprobar(this)">Procesal III</div>
-          <div class="ramo" id="administrativo1" onclick="aprobar(this)">Administrativo</div>
-          <div class="ramo" id="laboral1" onclick="aprobar(this)">Laboral I</div>
-          <div class="ramo" id="ingles3" onclick="aprobar(this)">Inglés III</div>
-        </div>
-
-        <div class="semestre">
-          <h3>VI Semestre</h3>
-          <div class="ramo" id="privado4" onclick="aprobar(this)">Privado IV</div>
-          <div class="ramo" id="penal4" onclick="aprobar(this)">Penal IV</div>
-          <div class="ramo" id="procesal4" onclick="aprobar(this)">Procesal IV</div>
-          <div class="ramo" id="administrativo2" onclick="aprobar(this)">Administrativo II</div>
-          <div class="ramo" id="laboral2" onclick="aprobar(this)">Laboral II</div>
-          <div class="ramo" id="ingles4" onclick="aprobar(this)">Inglés IV</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cuarto Año -->
-    <div class="bloque-anios">
-      <div class="anio">
-        <h2>Cuarto Año</h2>
-
-        <div class="semestre">
-          <h3>VII Semestre</h3>
-          <div class="ramo" id="privado5" onclick="aprobar(this)">Privado V</div>
-          <div class="ramo" id="procesal_penal" onclick="aprobar(this)">Procesal Penal</div>
-          <div class="ramo" id="procesal_especial" onclick="aprobar(this)">Procesal Especial</div>
-          <div class="ramo" id="tributario" onclick="aprobar(this)">Tributario</div>
-          <div class="ramo" id="comercial1" onclick="aprobar(this)">Comercial I</div>
-          <div class="ramo" id="ingles5" onclick="aprobar(this)">Inglés V</div>
-        </div>
-
-        <div class="semestre">
-          <h3>VIII Semestre</h3>
-          <div class="ramo" id="comercial2" onclick="aprobar(this)">Comercial II</div>
-          <div class="ramo" id="privado6" onclick="aprobar(this)">Privado VI</div>
-          <div class="ramo" id="clinica1" onclick="aprobar(this)">Clínica Jurídica I</div>
-          <div class="ramo" id="etica_prof" onclick="aprobar(this)">Ética Profesional</div>
-          <div class="ramo" id="estrategias_litigacion" onclick="aprobar(this)">Estrategias y Técnicas de Litigación</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Quinto Año -->
-    <div class="bloque-anios">
-      <div class="anio">
-        <h2>Quinto Año</h2>
-
-        <div class="semestre">
-          <h3>IX Semestre</h3>
-          <div class="ramo" id="clinica2" onclick="aprobar(this)">Clínica Jurídica II</div>
-          <div class="ramo" id="fund_bienes_personas" onclick="aprobar(this)">Instituciones Fundamentales del Derecho Civil: Bienes y Personas</div>
-          <div class="ramo" id="fund_fuentes_obligaciones" onclick="aprobar(this)">Instituciones Fundamentales del Derecho Civil: Fuentes de las Obligaciones</div>
-          <div class="ramo" id="fund_constitucional" onclick="aprobar(this)">Instituciones Fundamentales del Derecho Constitucional</div>
-          <div class="ramo" id="fund_procesal" onclick="aprobar(this)">Instituciones Fundamentales del Derecho Procesal</div>
-          <div class="ramo" id="resolucion_casos" onclick="aprobar(this)">Resolución de Casos</div>
-          <div class="ramo" id="ingles6" onclick="aprobar(this)">Inglés VI</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <script src="script.js"></script>
+  <div class="anio" id="anio2">
+    <h2>Segundo Año</h2>
+
+    <div class="semestre">
+      <h3>Semestre III</h3>
+      <div class="ramo" id="constitucional1">Constitucional I</div>
+      <div class="ramo" id="privado1">Privado I</div>
+      <div class="ramo" id="penal1">Penal I</div>
+      <div class="ramo" id="procesal1">Procesal I</div>
+      <div class="ramo" id="validez">Validez Espacial y Temporal del Derecho</div>
+      <div class="ramo" id="ingles1">Inglés I</div>
+    </div>
+
+    <div class="semestre">
+      <h3>Semestre IV</h3>
+      <div class="ramo" id="privado2">Privado II</div>
+      <div class="ramo" id="penal2">Penal II</div>
+      <div class="ramo" id="procesal2">Procesal II</div>
+      <div class="ramo" id="constitucional2">Constitucional II</div>
+      <div class="ramo" id="internacional">Internacional</div>
+      <div class="ramo" id="ingles2">Inglés II</div>
+    </div>
+  </div>
+
+  <div class="anio" id="anio3">
+    <h2>Tercer Año</h2>
+
+    <div class="semestre">
+      <h3>Semestre V</h3>
+      <div class="ramo" id="privado3">Privado III</div>
+      <div class="ramo" id="penal3">Penal III</div>
+      <div class="ramo" id="procesal3">Procesal III</div>
+      <div class="ramo" id="administrativo1">Administrativo</div>
+      <div class="ramo" id="laboral1">Laboral I</div>
+      <div class="ramo" id="ingles3">Inglés III</div>
+    </div>
+
+    <div class="semestre">
+      <h3>Semestre VI</h3>
+      <div class="ramo" id="privado4">Privado IV</div>
+      <div class="ramo" id="penal4">Penal IV</div>
+      <div class="ramo" id="procesal4">Procesal IV</div>
+      <div class="ramo" id="administrativo2">Administrativo II</div>
+      <div class="ramo" id="laboral2">Laboral II</div>
+      <div class="ramo" id="ingles4">Inglés IV</div>
+    </div>
+  </div>
+
+  <div class="anio" id="anio4">
+    <h2>Cuarto Año</h2>
+
+    <div class="semestre">
+      <h3>Semestre VII</h3>
+      <div class="ramo" id="privado5">Privado V</div>
+      <div class="ramo" id="procesal_penal">Procesal Penal</div>
+      <div class="ramo" id="procesal_especial">Procesal Especial</div>
+      <div class="ramo" id="tributario">Tributario</div>
+      <div class="ramo" id="comercial1">Comercial I</div>
+      <div class="ramo" id="ingles5">Inglés V</div>
+    </div>
+
+    <div class="semestre">
+      <h3>Semestre VIII</h3>
+      <div class="ramo" id="comercial2">Comercial II</div>
+      <div class="ramo" id="privado6">Privado VI</div>
+      <div class="ramo" id="clinica1">Clínica Jurídica I</div>
+      <div class="ramo" id="etica_prof">Ética Profesional</div>
+      <div class="ramo" id="estrategias_litigacion">Estrategias y Técnicas de Litigación</div>
+    </div>
+  </div>
+
+  <div class="anio" id="anio5">
+    <h2>Quinto Año</h2>
+
+    <div class="semestre">
+      <h3>Semestre IX</h3>
+      <div class="ramo" id="clinica2">Clínica Jurídica II</div>
+      <div class="ramo" id="fund_bienes_personas">Instituciones Fundamentales del Derecho Civil: Bienes y Personas</div>
+      <div class="ramo" id="fund_fuentes_obligaciones">Instituciones Fundamentales del Derecho Civil: Fuentes de las Obligaciones</div>
+      <div class="ramo" id="fund_constitucional">Instituciones Fundamentales del Derecho Constitucional</div>
+      <div class="ramo" id="fund_procesal">Instituciones Fundamentales del Derecho Procesal</div>
+      <div class="ramo" id="resolucion_casos">Resolución de Casos</div>
+      <div class="ramo" id="ingles6">Inglés VI</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Mapeo de ramos con sus requisitos para habilitar
+  const requisitos = {
+    "constitucional1": ["fund_publico"],
+    "privado1": ["fund_privado"],
+    "penal1": ["criminologia"],
+    "procesal1": ["teoria_sistema"],
+
+    "privado2": ["privado1"],
+    "penal2": ["penal1"],
+    "procesal2": ["procesal1"],
+    "constitucional2": ["constitucional1"],
+    "internacional": ["validez"],
+    "ingles2": ["ingles1"],
+
+    "privado3": ["privado2"],
+    "penal3": ["penal2"],
+    "procesal3": ["procesal2"],
+    "administrativo1": ["constitucional2"],
+    "ingles3": ["ingles2"],
+    "laboral2": ["laboral1"],
+
+    "privado4": ["privado3"],
+    "penal4": ["penal3"],
+    "procesal4": ["procesal3"],
+    "administrativo2": ["constitucional2"],
+    
+    "privado5": ["privado4"],
+    "procesal_penal": ["penal4"],
+    "procesal_especial": ["procesal4"],
+    "tributario": ["administrativo2"],
+    "comercial1": ["privado4"],
+    "ingles5": ["ingles4"],
+
+    "comercial2": ["comercial1"],
+    "privado6": ["privado5"],
+    "clinica1": ["privado5", "procesal_especial", "procesal_penal"],
+    "etica_prof": ["procesal_especial", "procesal_penal"],
+
+    "clinica2": ["clinica1"],
+    "fund_bienes_personas": ["privado6", "procesal_especial"],
+    "fund_fuentes_obligaciones": ["privado6", "procesal_especial"],
+    "fund_constitucional": ["privado6", "procesal_especial"],
+    "fund_procesal": ["privado6", "procesal_especial"],
+    "resolucion_casos": ["privado6", "procesal_especial"],
+    "ingles6": ["ingles5"],
+  };
+
+  const aprobados = new Set();
+
+  const colores = ["color1", "color2", "color3", "color4"];
+  let colorIndex = 0;
+
+  // Función para validar si puede aprobar un ramo
+  function puedeAprobar(id) {
+    if (!requisitos[id]) return true; // Sin requisitos
+    return requisitos[id].every(r => aprobados.has(r));
+  }
+
+  function actualizarVisual() {
+    document.querySelectorAll(".ramo").forEach(div => {
+      const id = div.id;
+      if (aprobados.has(id)) {
+        div.classList.add("aprobado");
+        div.classList.remove("bloqueado");
+        div.classList.remove("desbloqueado");
+        if (!div.classList.contains(colores[colorIndex % colores.length])) {
+          div.classList.remove(...colores);
+          div.classList.add(colores[colorIndex % colores.length]);
+          colorIndex++;
+        }
+      } else if (puedeAprobar(id)) {
+        div.classList.remove("bloqueado");
+        div.classList.add("desbloqueado");
+        div.classList.remove("aprobado", ...colores);
+      } else {
+        div.classList.add("bloqueado");
+        div.classList.remove("desbloqueado", "aprobado", ...colores);
+      }
+    });
+  }
+
+  function aprobar(div) {
+    const id = div.id;
+    if (!puedeAprobar(id)) {
+      alert("Debes aprobar primero los requisitos.");
+      return;
+    }
+    if (aprobados.has(id)) {
+      aprobados.delete(id);
+    } else {
+      aprobados.add(id);
+    }
+    actualizarVisual();
+  }
+
+  // Agregar evento click a cada ramo
+  document.querySelectorAll(".ramo").forEach(div => {
+    div.addEventListener("click", () => aprobar(div));
+  });
+
+  actualizarVisual();
+
+</script>
+
 </body>
 </html>
