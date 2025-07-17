@@ -1,84 +1,60 @@
 body {
-  font-family: "Arial Nova", Arial, sans-serif;
   background-color: #D81B60;
+  font-family: "Arial Nova", sans-serif;
+  font-size: 12pt;
   color: white;
   margin: 0;
   padding: 20px;
+  text-align: center;
 }
 
 h1 {
-  text-align: center;
+  margin-bottom: 40px;
   font-size: 28px;
-  color: white;
-  margin-bottom: 30px;
 }
 
-.contenedor-anios {
+.malla {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: 40px;
+  gap: 30px;
+  overflow-x: auto;
 }
 
 .anio {
-  background-color: #c2185b;
-  padding: 20px;
-  border-radius: 15px;
-  min-width: 350px;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.anio h2 {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: white;
-}
-
-.semestre {
   background-color: #ff5aa4;
   padding: 15px;
   border-radius: 10px;
-  margin-bottom: 15px;
-  width: 100%;
+  min-width: 220px;
+}
+
+.semestre {
+  margin-bottom: 20px;
 }
 
 .semestre h3 {
-  text-align: center;
-  font-size: 18px;
   margin-bottom: 10px;
+  font-size: 14px;
   color: white;
 }
 
-.curso {
+.ramo {
   background-color: #ff96c5;
   padding: 10px;
+  margin-bottom: 10px;
   border-radius: 6px;
-  margin-bottom: 6px;
-  font-size: 13px;
-  text-align: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.curso:hover {
+.ramo:hover {
   background-color: #ff1b82;
 }
 
-.curso.aprobado {
-  background-color: #f70071 !important;
+.ramo.aprobado {
+  background-color: #800000;
   color: white;
-  text-decoration: line-through;
   font-style: italic;
+  text-decoration: line-through;
   cursor: default;
-}
-
-.curso.bloqueado {
-  background-color: #bdbdbd;
-  color: #eeeeee;
-  cursor: not-allowed;
-  opacity: 0.5;
 }
