@@ -1,12 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Arial+Nova+Condensed&display=swap');
+/* estilos.css */
 
 body {
-  font-family: 'Arial Nova Condensed', Arial, sans-serif;
-  font-size: 12pt;
+  font-family: "Arial Nova Cond", Arial, sans-serif;
   background-color: #D81B60;
   color: white;
   padding: 20px;
   margin: 0;
+}
+
+h1, h2, h3 {
+  color: white;
+  margin: 0 0 10px 0;
 }
 
 h1 {
@@ -14,117 +18,80 @@ h1 {
   margin-bottom: 30px;
   font-weight: 700;
   font-size: 2rem;
-  color: white;
 }
 
-.contenedor-malla {
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
-/* Cada bloque (grupos de años) */
-.bloque-container {
-  background: rgba(255 255 255 / 0.1);
+.anio {
+  border: 2px solid white;
   border-radius: 12px;
   padding: 20px;
-  min-width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  min-width: 280px;
+  background: rgba(255 255 255 / 0.1);
+  box-sizing: border-box;
 }
 
-.bloque-titulo {
-  font-weight: 900;
-  font-size: 1.6rem;
-  text-align: center;
-  margin-bottom: 16px;
-  border-bottom: 3px solid #ff96c5;
-  padding-bottom: 8px;
-  color: white;
-  user-select: none;
-}
-
-/* Los años dentro del bloque */
-.anio-container {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-}
-
-/* Cada año */
-.anio {
-  background: rgba(255 255 255 / 0.15);
-  border-radius: 10px;
-  padding: 14px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  box-shadow: inset 0 0 8px rgba(255 255 255 / 0.2);
-}
-
-.anio-titulo {
-  font-weight: 800;
-  font-size: 1.3rem;
-  border-bottom: 2px solid #ff5aa4;
-  padding-bottom: 6px;
-  color: white;
-  user-select: none;
-}
-
-/* Semestres dentro de año */
 .semestre {
-  background: rgba(255 255 255 / 0.2);
-  border-radius: 8px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  margin-top: 15px;
+  background: rgba(255 255 255 / 0.15);
+  padding: 15px;
+  border-radius: 10px;
 }
 
-.semestre-titulo {
-  font-weight: 700;
+.semestre h3 {
+  font-weight: 600;
+  margin-bottom: 12px;
   font-size: 1.1rem;
-  border-bottom: 1px solid #ff5aa4;
-  padding-bottom: 4px;
-  user-select: none;
+  border-bottom: 1px solid white;
+  padding-bottom: 6px;
 }
 
-/* Ramos */
 .ramo {
-  background-color: #ff96c5;  /* rosa claro */
-  border: 2px solid #ff1b82; /* rosa fuerte */
-  border-radius: 6px;
-  padding: 10px;
-  text-align: center;
+  background: #ff96c5;
+  border-radius: 8px;
+  margin: 6px 0;
+  padding: 10px 12px;
   cursor: pointer;
   user-select: none;
-  font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: white;
-  font-style: normal;
-  text-decoration: none;
-}
-
-.ramo:hover:not(.bloqueado):not(.aprobado) {
-  background-color: #ff5aa4;
-  border-color: #f70071;
 }
 
 .ramo.bloqueado {
+  background: #ff5aa4;
   opacity: 0.5;
   cursor: default;
+  text-decoration: none;
 }
 
 .ramo.aprobado {
-  background-color: #880E4F; /* burdeos vino */
+  background: #880e4f;
   color: white;
   text-decoration: line-through;
   font-style: italic;
-  cursor: default;
+  cursor: pointer;
+}
+
+.ramo.aprobado:first-child {
+  color: #f70071; /* primer aprobado color rosa fuerte */
+}
+
+.ramo.aprobado:nth-child(2) {
+  color: #ff1b82; /* segundo aprobado */
+}
+
+.ramo.aprobado:nth-child(3) {
+  color: #ff5aa4; /* tercero */
+}
+
+.ramo.aprobado:nth-child(4) {
+  color: #ff96c5; /* cuarto */
 }
