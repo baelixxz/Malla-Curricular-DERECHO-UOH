@@ -1,70 +1,84 @@
 // Diccionario de requisitos por ID
 const requisitos = {
-  'ramo13': ['ramo2'], // Ejemplo: Privado I requiere Fundamentos Derecho Privado
-  'ramo14': ['ramo8'], // Penal I requiere Criminología y Política Criminal
-  'ramo15': ['ramo9'], // Procesal I requiere Teoría del Sistema Jurídico
-  'ramo16': ['ramo3'], // Constitucional I requiere Fundamentos Derecho Público
-  'ramo17': ['ramo12'], // Inglés I requiere Razonamiento Jurídico
+  'ramo13': ['ramo2'],
+  'ramo14': ['ramo8'],
+  'ramo15': ['ramo9'],
+  'ramo16': ['ramo3'],
+  'ramo17': ['ramo12'],
 
-  'ramo18': ['ramo13'], // Privado II requiere Privado I
-  'ramo19': ['ramo14'], // Penal II requiere Penal I
-  'ramo20': ['ramo15'], // Procesal II requiere Procesal I
-  'ramo21': ['ramo16'], // Constitucional II requiere Constitucional I
-  'ramo22': ['ramo10'], // Internacional requiere Validez Espacial y Temporal
-  'ramo23': ['ramo17'], // Inglés II requiere Inglés I
+  'ramo18': ['ramo13'],
+  'ramo19': ['ramo14'],
+  'ramo20': ['ramo15'],
+  'ramo21': ['ramo16'],
+  'ramo22': ['ramo10'],
+  'ramo23': ['ramo17'],
 
-  'ramo24': ['ramo18'], // Privado III
-  'ramo25': ['ramo19'], // Penal III
-  'ramo26': ['ramo20'], // Procesal III
-  'ramo27': ['ramo21'], // Administrativo requiere Constitucional II
-  'ramo29': ['ramo23'], // Inglés III
+  'ramo24': ['ramo18'],
+  'ramo25': ['ramo19'],
+  'ramo26': ['ramo20'],
+  'ramo27': ['ramo21'],
+  'ramo29': ['ramo23'],
 
-  'ramo30': ['ramo24'], // Privado IV
-  'ramo31': ['ramo25'], // Penal IV
-  'ramo32': ['ramo26'], // Procesal IV
-  'ramo33': ['ramo21'], // Administrativo II
-  'ramo34': ['ramo28'], // Laboral II requiere Laboral I
-  'ramo35': ['ramo29'], // Inglés IV
+  'ramo30': ['ramo24'],
+  'ramo31': ['ramo25'],
+  'ramo32': ['ramo26'],
+  'ramo33': ['ramo21'],
+  'ramo34': ['ramo28'],
+  'ramo35': ['ramo29'],
 
-  'ramo36': ['ramo30'], // Privado V
-  'ramo37': ['ramo31'], // Procesal Penal
-  'ramo38': ['ramo32'], // Procesal Especial
-  'ramo39': ['ramo33'], // Tributario
-  'ramo40': ['ramo30'], // Comercial I requiere Privado IV
-  'ramo41': ['ramo35'], // Inglés V
+  'ramo36': ['ramo30'],
+  'ramo37': ['ramo31'],
+  'ramo38': ['ramo32'],
+  'ramo39': ['ramo33'],
+  'ramo40': ['ramo30'],
+  'ramo41': ['ramo35'],
 
-  'ramo42': ['ramo40'], // Comercial II
-  'ramo43': ['ramo36', 'ramo37', 'ramo38'], // Clínica Jurídica I
-  'ramo44': ['ramo37', 'ramo38'], // Ética Profesional
-  'ramo46': ['ramo43'], // Clínica Jurídica II
-  'ramo47': ['ramo36', 'ramo38'], // Instituciones Fundamentales Civil Bienes y Personas
-  'ramo48': ['ramo36', 'ramo38'], // Instituciones Fundamentales Civil Obligaciones
-  'ramo49': ['ramo36', 'ramo38'], // Constitucional Fund.
-  'ramo50': ['ramo36', 'ramo38'], // Procesal Fund.
-  'ramo51': ['ramo36', 'ramo38'], // Resolución de Casos
-  'ramo52': ['ramo41'], // Inglés VI
+  'ramo42': ['ramo40'],
+  'ramo43': ['ramo36', 'ramo37', 'ramo38'],
+  'ramo44': ['ramo37', 'ramo38'],
+  'ramo46': ['ramo43'],
+  'ramo47': ['ramo36', 'ramo38'],
+  'ramo48': ['ramo36', 'ramo38'],
+  'ramo49': ['ramo36', 'ramo38'],
+  'ramo50': ['ramo36', 'ramo38'],
+  'ramo51': ['ramo36', 'ramo38'],
+  'ramo52': ['ramo41']
 };
 
-function aprobar(element) {
-  if (element.classList.contains('aprobado')) return;
-
-  element.classList.add('aprobado');
-
-  // Revisa si otros ramos se pueden desbloquear
+// Al cargar la página, inicializa los ramos
+window.addEventListener('DOMContentLoaded', () => {
   const ramos = document.querySelectorAll('.ramo');
+
   ramos.forEach(ramo => {
     const id = ramo.id;
     const reqs = requisitos[id];
-    if (!reqs) return;
 
-    const todosAprobados = reqs.every(req => {
-      const reqElement = document.getElementById(req);
-      return reqElement && reqElement.classList.contains('aprobado');
-    });
-
-    if (todosAprobados) {
-      ramo.classList.remove('bloqueado');
-      ramo.classList.add('desbloqueado');
+    if (reqs && reqs.length > 0) {
+      ramo.classList.add('bloqueado');
     }
+
+    ramo.addEventListener('click', () => {
+      if (ramo.classList.contains('bloqueado') || ramo.classList.contains('aprobado')) return;
+
+      ramo.classList.add('aprobado');
+
+      // Desbloquear otros ramos si sus requisitos ahora están aprobados
+      ramos.forEach(r => {
+        const rId = r.id;
+        const rReqs = requisitos[rId];
+
+        if (!rReqs || r.classList.contains('aprobado')) return;
+
+        const desbloquear = rReqs.every(reqId => {
+          const reqElement = document.getElementById(reqId);
+          return reqElement && reqElement.classList.contains('aprobado');
+        });
+
+        if (desbloquear) {
+          r.classList.remove('bloqueado');
+          r.classList.add('desbloqueado');
+        }
+      });
+    });
   });
-}
+});
