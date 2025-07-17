@@ -1,12 +1,9 @@
-/* Reset básico */
-* {
-  box-sizing: border-box;
-}
+/* estilos.css */
 
 body {
   font-family: 'Arial Nova Condensed', Arial, sans-serif;
   background: #fff0f5;
-  color: #4b1c33;
+  color: white;
   padding: 20px;
   margin: 0;
 }
@@ -14,100 +11,85 @@ body {
 h1 {
   text-align: center;
   margin-bottom: 30px;
-  color: #7b1e3e;
+  color: white;
+  font-weight: bold;
+  font-size: 2.5rem;
 }
 
-/* Contenedor años - flex para que se alineen horizontal */
 #contenedor-anos {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
   justify-content: center;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 10px;
 }
 
-/* Cada año en columna vertical */
-.ano {
-  background: #ff96c5; /* rosa suave */
-  border-radius: 12px;
-  padding: 12px;
+.anio {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border: 2px solid #ff5aa4;
+  border-radius: 15px;
+  padding: 15px;
+  background: #ff96c5;
   min-width: 280px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Título del año */
-.ano h2 {
-  color: #800000; /* burdeos oscuro */
+.anio h2 {
   text-align: center;
-  margin: 0 0 10px;
-  border-bottom: 2px solid #800000;
-  padding-bottom: 6px;
-  font-weight: 700;
-  font-size: 1.4rem;
+  margin: 0 0 15px 0;
+  font-weight: 900;
+  font-size: 1.7rem;
+  color: white;
+  text-shadow: 1px 1px 3px #aa3d6a;
 }
 
-/* Contenedor de semestres dentro del año */
-.semestres {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* Cada semestre - bloque con título y ramos */
 .semestre {
-  background: #ff5aa4; /* rosa medio */
-  border-radius: 10px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  border: 2px solid #ff1b82;
+  border-radius: 12px;
+  padding: 10px;
+  background: #ff5aa4;
 }
 
-/* Título semestre */
 .semestre h3 {
-  color: #800000;
-  margin: 0 0 6px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 1.2rem;
-  border-bottom: 1px solid #800000;
-  padding-bottom: 4px;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: white;
+  text-shadow: 1px 1px 2px #8a115c;
 }
 
-/* Ramos dentro del semestre */
 .ramo {
-  background: #ff1b82; /* rosa fuerte */
-  border: 2px solid #800000;
+  background: #f70071;
   border-radius: 8px;
-  padding: 8px 12px;
+  margin: 5px 0;
+  padding: 10px;
   cursor: pointer;
   user-select: none;
-  color: white; /* texto blanco siempre */
-  transition: background-color 0.3s ease, color 0.3s ease;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  color: white;
+  transition: background-color 0.3s ease, font-style 0.3s ease;
 }
 
-/* Ramo bloqueado */
 .ramo.bloqueado {
   opacity: 0.5;
   cursor: default;
+  background: #ff96c5;
+  color: #fce7f0;
+  font-style: normal;
 }
 
-/* Ramo aprobado */
 .ramo.aprobado {
-  background: #f70071; /* burdeos vivo */
+  background: #800000;
   text-decoration: line-through;
   font-style: italic;
-  cursor: default;
+  color: #ff1b82;
+  font-weight: 700;
 }
 
-/* Hover sólo en ramos desbloqueados y no aprobados */
 .ramo:hover:not(.bloqueado):not(.aprobado) {
-  background-color: #ff96c5;
+  background: #ff1b82;
 }
