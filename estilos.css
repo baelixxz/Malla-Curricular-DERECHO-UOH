@@ -1,91 +1,84 @@
-/* styles.css */
-
 body {
-  margin: 0;
-  padding: 20px;
-  font-family: 'Arial Nova', Arial, sans-serif;
+  font-family: "Arial Nova", Arial, sans-serif;
   background-color: #D81B60;
   color: white;
+  padding: 20px;
+  margin: 0;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 2.2rem;
 }
 
 .malla {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: nowrap;
+  gap: 20px;
   overflow-x: auto;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 .anio {
-  background-color: #880e4f; /* tono oscuro para cada bloque año */
-  border-radius: 10px;
+  min-width: 250px;
+  background-color: #ff5aa4;
+  border-radius: 15px;
   padding: 15px;
-  min-width: 300px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-sizing: border-box;
 }
 
 .anio h2 {
-  margin: 0 0 10px 0;
-  font-size: 22px;
   text-align: center;
   font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid white;
 }
 
 .semestre {
-  background-color: #b71c4a; /* color intermedio para semestres */
-  border-radius: 8px;
+  background-color: #ff96c5;
+  border-radius: 10px;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .semestre h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
   text-align: center;
+  margin: 0 0 10px 0;
   font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .ramo {
-  background-color: #ff5aa4; /* color base para ramos desbloqueados */
-  border-radius: 6px;
-  padding: 8px 10px;
+  background-color: #ff1b82;
+  padding: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  user-select: none;
-  font-size: 14px;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
   text-align: center;
-}
-
-.ramo:hover:not(.aprobado):not(.bloqueado) {
-  background-color: #ff96c5;
-}
-
-.ramo.aprobado {
-  background-color: #ff9ae3 !important; /* color fijo para aprobado */
-  font-style: italic;
-  cursor: default;
-  text-decoration: line-through;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  font-size: 0.95rem;
   color: white;
 }
 
 .ramo.bloqueado {
-  background-color: #5a0835;
-  cursor: not-allowed;
-  opacity: 0.6;
-  text-decoration: none;
+  background-color: #ff96c5;
+  cursor: default;
+  opacity: 0.5;
 }
 
+.ramo.aprobado {
+  background-color: #ff9ae3 !important;
+  color: white !important;
+  font-style: italic;
+  cursor: default;
+  text-decoration: line-through;
+}
