@@ -1,107 +1,93 @@
+/* Fondo y tipografía general */
 body {
-  font-family: 'Arial Nova Condensed', Arial, sans-serif;
+  font-family: 'Arial Nova', Arial, sans-serif;
   background-color: #D81B60;
   color: white;
   padding: 20px;
   margin: 0;
-  box-sizing: border-box;
 }
 
+/* Título principal */
 h1 {
   text-align: center;
-  margin-bottom: 40px;
-  font-size: 2.2rem;
+  margin-bottom: 30px;
   font-weight: bold;
+  font-size: 2rem;
 }
 
+/* Contenedor general de la malla curricular */
 .malla {
   display: flex;
-  gap: 30px;
-  padding: 10px;
-  overflow-x: auto; /* Permite scroll horizontal si no caben */
-  max-width: 100vw; /* No sobrepasa el ancho visible */
-  box-sizing: border-box;
-  scrollbar-width: thin;
-  scrollbar-color: #ff5aa4 #d81b60;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 20px;
 }
 
-/* Para navegadores WebKit (Chrome, Safari) */
-.malla::-webkit-scrollbar {
-  height: 8px;
-}
-.malla::-webkit-scrollbar-track {
-  background: #d81b60;
-}
-.malla::-webkit-scrollbar-thumb {
-  background-color: #ff5aa4;
-  border-radius: 4px;
-}
-
-/* Cada bloque de año */
+/* Cada año */
 .anio {
-  background-color: #ff1b82;
-  padding: 20px;
-  border-radius: 12px;
-  min-width: 320px; /* Anchura mínima para que no quede muy estrecho */
-  box-sizing: border-box;
-  flex-shrink: 0; /* No se encoge en flex */
+  min-width: 280px;
+  background-color: #9c164a; /* burdeos oscuro para contraste */
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
+/* Título de cada año */
 .anio h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-weight: 700;
-  font-size: 1.5rem;
   text-align: center;
-  border-bottom: 2px solid white;
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #ff5aa4;
   padding-bottom: 8px;
 }
 
+/* Cada semestre dentro del año */
 .semestre {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
+/* Título del semestre */
 .semestre h3 {
   margin-bottom: 12px;
   font-weight: 600;
-  font-size: 1.2rem;
-  border-bottom: 1px solid white;
-  padding-bottom: 4px;
+  font-size: 1.1rem;
+  border-left: 4px solid #ff5aa4;
+  padding-left: 8px;
 }
 
+/* Ramos (cursos) */
 .ramo {
-  background-color: #ff96c5;
-  border-radius: 8px;
-  padding: 10px 12px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  user-select: none;
-  font-style: normal;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-size: 1rem;
-  text-align: center;
+  background-color: #ff1b82; /* desbloqueado */
   color: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  cursor: pointer;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border-radius: 6px;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  font-size: 0.95rem;
 }
 
-.ramo:hover:not(.bloqueado):not(.aprobado) {
-  background-color: #ff5aa4;
-}
-
-/* Ramos bloqueados */
+/* Estado bloqueado */
 .ramo.bloqueado {
-  background-color: #ffb6d4;
-  color: #660033;
-  cursor: not-allowed;
-  opacity: 0.7;
-  font-style: italic;
+  background-color: #ff5aa4;
+  opacity: 0.6;
+  cursor: default;
 }
 
-/* Ramos aprobados */
+/* Estado aprobado */
 .ramo.aprobado {
   background-color: #f70071;
   color: white;
+  font-style: italic;
   text-decoration: line-through;
   cursor: default;
-  font-style: italic;
+}
+
+/* Hover solo para desbloqueados */
+.ramo:hover:not(.bloqueado):not(.aprobado) {
+  background-color: #ff96c5;
 }
