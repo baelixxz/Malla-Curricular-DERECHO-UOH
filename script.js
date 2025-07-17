@@ -1,90 +1,143 @@
-const cursosPorSemestre = [
-  {
-    nombre: "Primer Año - I Semestre",
-    cursos: [
-      { id: "fund_privado", nombre: "Fundamentos de Derecho Privado", requisitos: [] },
-      { id: "fund_publico", nombre: "Fundamentos de Derecho Público", requisitos: [] },
-      { id: "historia", nombre: "Historia de las Ideas e Instituciones Jurídicas", requisitos: [] },
-      { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [] },
-      { id: "lenguaje", nombre: "Lenguaje del Derecho", requisitos: [] },
-      { id: "taller_oral", nombre: "Taller de Expresión Oral y Escrita", requisitos: [] },
-    ]
-  },
-  {
-    nombre: "Primer Año - II Semestre",
-    cursos: [
-      { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [] },
-      { id: "criminologia", nombre: "Criminología y Política Criminal", requisitos: [] },
-      { id: "teoria_sistema", nombre: "Teoría del Sistema Jurídico", requisitos: [] },
-      { id: "metod_investigacion", nombre: "Metodología de la Investigación Jurídico-Social", requisitos: [] },
-      { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [] },
-      { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [] },
-    ]
-  }
+const cursos = [
+  // Primer año I Semestre
+  { id: "fund_privado", nombre: "Fundamentos de Derecho Privado", requisitos: [], semestre: "Primer Año I Semestre" },
+  { id: "fund_publico", nombre: "Fundamentos de Derecho Público", requisitos: [], semestre: "Primer Año I Semestre" },
+  { id: "historia", nombre: "Historia de las Ideas e Instituciones Jurídicas", requisitos: [], semestre: "Primer Año I Semestre" },
+  { id: "sociologia", nombre: "Sociología Jurídica", requisitos: [], semestre: "Primer Año I Semestre" },
+  { id: "lenguaje", nombre: "Lenguaje del Derecho", requisitos: [], semestre: "Primer Año I Semestre" },
+  { id: "taller_oral", nombre: "Taller de Expresión Oral y Escrita", requisitos: [], semestre: "Primer Año I Semestre" },
+
+  // Primer año II Semestre
+  { id: "derecho_economia", nombre: "Derecho y Economía", requisitos: [], semestre: "Primer Año II Semestre" },
+  { id: "criminologia", nombre: "Criminología y Política Criminal", requisitos: [], semestre: "Primer Año II Semestre" },
+  { id: "teoria_sistema", nombre: "Teoría del Sistema Jurídico", requisitos: [], semestre: "Primer Año II Semestre" },
+  { id: "metod_investigacion", nombre: "Metodología de la Investigación Jurídico-Social", requisitos: [], semestre: "Primer Año II Semestre" },
+  { id: "tradiciones", nombre: "Tradiciones Jurídicas Comparadas", requisitos: [], semestre: "Primer Año II Semestre" },
+  { id: "razonamiento", nombre: "Razonamiento Jurídico", requisitos: [], semestre: "Primer Año II Semestre" },
+
+  // Segundo Año III Semestre
+  { id: "constitucional1", nombre: "Constitucional I", requisitos: ["fund_publico"], semestre: "Segundo Año III Semestre" },
+  { id: "privado1", nombre: "Privado I", requisitos: ["fund_privado"], semestre: "Segundo Año III Semestre" },
+  { id: "penal1", nombre: "Penal I", requisitos: ["criminologia"], semestre: "Segundo Año III Semestre" },
+  { id: "procesal1", nombre: "Procesal I", requisitos: ["teoria_sistema"], semestre: "Segundo Año III Semestre" },
+  { id: "validez", nombre: "Validez Espacial y Temporal del Derecho", requisitos: [], semestre: "Segundo Año III Semestre" },
+  { id: "ingles1", nombre: "Inglés I", requisitos: [], semestre: "Segundo Año III Semestre" },
+
+  // Segundo Año IV Semestre
+  { id: "privado2", nombre: "Privado II", requisitos: ["privado1"], semestre: "Segundo Año IV Semestre" },
+  { id: "penal2", nombre: "Penal II", requisitos: ["penal1"], semestre: "Segundo Año IV Semestre" },
+  { id: "procesal2", nombre: "Procesal II", requisitos: ["procesal1"], semestre: "Segundo Año IV Semestre" },
+  { id: "constitucional2", nombre: "Constitucional II", requisitos: ["constitucional1"], semestre: "Segundo Año IV Semestre" },
+  { id: "internacional", nombre: "Internacional", requisitos: ["validez"], semestre: "Segundo Año IV Semestre" },
+  { id: "ingles2", nombre: "Inglés II", requisitos: ["ingles1"], semestre: "Segundo Año IV Semestre" },
+
+  // Tercer Año V Semestre
+  { id: "privado3", nombre: "Privado III", requisitos: ["privado2"], semestre: "Tercer Año V Semestre" },
+  { id: "penal3", nombre: "Penal III", requisitos: ["penal2"], semestre: "Tercer Año V Semestre" },
+  { id: "procesal3", nombre: "Procesal III", requisitos: ["procesal2"], semestre: "Tercer Año V Semestre" },
+  { id: "administrativo1", nombre: "Administrativo", requisitos: ["constitucional2"], semestre: "Tercer Año V Semestre" },
+  { id: "laboral1", nombre: "Laboral I", requisitos: [], semestre: "Tercer Año V Semestre" },
+  { id: "ingles3", nombre: "Inglés III", requisitos: ["ingles2"], semestre: "Tercer Año V Semestre" },
+
+  // Tercer Año VI Semestre
+  { id: "privado4", nombre: "Privado IV", requisitos: ["privado3"], semestre: "Tercer Año VI Semestre" },
+  { id: "penal4", nombre: "Penal IV", requisitos: ["penal3"], semestre: "Tercer Año VI Semestre" },
+  { id: "procesal4", nombre: "Procesal IV", requisitos: ["procesal3"], semestre: "Tercer Año VI Semestre" },
+  { id: "administrativo2", nombre: "Administrativo II", requisitos: ["constitucional2"], semestre: "Tercer Año VI Semestre" },
+  { id: "laboral2", nombre: "Laboral II", requisitos: ["laboral1"], semestre: "Tercer Año VI Semestre" },
+  { id: "ingles4", nombre: "Inglés IV", requisitos: ["ingles3"], semestre: "Tercer Año VI Semestre" },
+
+  // Cuarto Año VII Semestre
+  { id: "privado5", nombre: "Privado V", requisitos: ["privado4"], semestre: "Cuarto Año VII Semestre" },
+  { id: "procesal_penal", nombre: "Procesal Penal", requisitos: ["penal4"], semestre: "Cuarto Año VII Semestre" },
+  { id: "procesal_especial", nombre: "Procesal Especial", requisitos: ["procesal4"], semestre: "Cuarto Año VII Semestre" },
+  { id: "tributario", nombre: "Tributario", requisitos: ["administrativo2"], semestre: "Cuarto Año VII Semestre" },
+  { id: "comercial1", nombre: "Comercial I", requisitos: ["privado4"], semestre: "Cuarto Año VII Semestre" },
+  { id: "ingles5", nombre: "Inglés V", requisitos: ["ingles4"], semestre: "Cuarto Año VII Semestre" },
+
+  // Cuarto Año VIII Semestre
+  { id: "comercial2", nombre: "Comercial II", requisitos: ["comercial1"], semestre: "Cuarto Año VIII Semestre" },
+  { id: "privado6", nombre: "Privado VI", requisitos: ["privado5"], semestre: "Cuarto Año VIII Semestre" },
+  { id: "clinica1", nombre: "Clínica Jurídica I", requisitos: ["privado5", "procesal_especial", "procesal_penal"], semestre: "Cuarto Año VIII Semestre" },
+  { id: "etica_prof", nombre: "Ética Profesional", requisitos: ["procesal_especial", "procesal_penal"], semestre: "Cuarto Año VIII Semestre" },
+  { id: "estrategias_litigacion", nombre: "Estrategias y Técnicas de Litigación", requisitos: [], semestre: "Cuarto Año VIII Semestre" },
+
+  // Quinto Año IX Semestre
+  { id: "clinica2", nombre: "Clínica Jurídica II", requisitos: ["clinica1"], semestre: "Quinto Año IX Semestre" },
+  { id: "fund_bienes_personas", nombre: "Instituciones Fundamentales del Derecho Civil: Bienes y Personas", requisitos: ["privado6", "procesal_especial"], semestre: "Quinto Año IX Semestre" },
+  { id: "fund_fuentes_obligaciones", nombre: "Instituciones Fundamentales del Derecho Civil: Fuentes de las Obligaciones", requisitos: ["privado6", "procesal_especial"], semestre: "Quinto Año IX Semestre" },
+  { id: "fund_constitucional", nombre: "Instituciones Fundamentales del Derecho Constitucional", requisitos: ["privado6", "procesal_especial"], semestre: "Quinto Año IX Semestre" },
+  { id: "fund_procesal", nombre: "Instituciones Fundamentales del Derecho Procesal", requisitos: ["privado6", "procesal_especial"], semestre: "Quinto Año IX Semestre" },
+  { id: "resolucion_casos", nombre: "Resolución de Casos", requisitos: ["privado6", "procesal_especial"], semestre: "Quinto Año IX Semestre" },
+  { id: "ingles6", nombre: "Inglés VI", requisitos: ["ingles5"], semestre: "Quinto Año IX Semestre" }
 ];
 
+const semestresContainer = document.getElementById('semestres-container');
 const aprobados = {};
 
+// Devuelve true si todos los requisitos están aprobados
 function puedeAprobar(id) {
-  for (const semestre of cursosPorSemestre) {
-    for (const curso of semestre.cursos) {
-      if (curso.id === id) {
-        return curso.requisitos.every(r => aprobados[r]);
-      }
-    }
-  }
-  return false;
+  const curso = cursos.find(c => c.id === id);
+  if (!curso) return false;
+  return curso.requisitos.every(r => aprobados[r]);
 }
 
+// Toggle aprobar o desaprobar curso
 function toggleAprobar(id) {
   if (!puedeAprobar(id)) {
     alert("Este ramo está bloqueado. Debes aprobar los requisitos primero.");
     return;
   }
   aprobados[id] = !aprobados[id];
+  if (!aprobados[id]) delete aprobados[id]; // para limpiar si se desaprueba
   actualizarVisual();
 }
 
-function generarMalla() {
-  const malla = document.getElementById('malla');
-  malla.innerHTML = '';
-  for (const semestre of cursosPorSemestre) {
-    const divSemestre = document.createElement('div');
-    divSemestre.className = 'semestre';
+// Crear el contenedor de semestres y cursos
+function crearSemestres() {
+  // Obtener todos los semestres sin repetir
+  const semestresUnicos = [...new Set(cursos.map(c => c.semestre))];
 
-    const h2 = document.createElement('h2');
-    h2.textContent = semestre.nombre;
-    divSemestre.appendChild(h2);
+  semestresUnicos.forEach(semestre => {
+    const divSem = document.createElement('div');
+    divSem.classList.add('semestre');
 
-    for (const curso of semestre.cursos) {
-      const divRamo = document.createElement('div');
-      divRamo.className = 'ramo';
-      divRamo.id = curso.id;
-      divRamo.textContent = curso.nombre;
-      divRamo.addEventListener('click', () => toggleAprobar(curso.id));
-      divSemestre.appendChild(divRamo);
-    }
+    const titulo = document.createElement('h2');
+    titulo.textContent = semestre;
+    divSem.appendChild(titulo);
 
-    malla.appendChild(divSemestre);
-  }
+    // Cursos de este semestre
+    const cursosDelSem = cursos.filter(c => c.semestre === semestre);
+    cursosDelSem.forEach(curso => {
+      const divCurso = document.createElement('div');
+      divCurso.classList.add('ramo');
+      divCurso.id = curso.id;
+      divCurso.textContent = curso.nombre;
+
+      divCurso.addEventListener('click', () => toggleAprobar(curso.id));
+
+      divSem.appendChild(divCurso);
+    });
+
+    semestresContainer.appendChild(divSem);
+  });
 }
 
+// Actualiza los estilos de los cursos según su estado
 function actualizarVisual() {
-  for (const semestre of cursosPorSemestre) {
-    for (const curso of semestre.cursos) {
-      const div = document.getElementById(curso.id);
-      if (aprobados[curso.id]) {
-        div.classList.add('aprobado');
-        div.classList.remove('bloqueado');
-      } else if (!puedeAprobar(curso.id)) {
-        div.classList.add('bloqueado');
-        div.classList.remove('aprobado');
-      } else {
-        div.classList.remove('bloqueado', 'aprobado');
-      }
+  cursos.forEach(curso => {
+    const div = document.getElementById(curso.id);
+    if (aprobados[curso.id]) {
+      div.classList.add('aprobado');
+      div.classList.remove('bloqueado');
+    } else if (!puedeAprobar(curso.id)) {
+      div.classList.add('bloqueado');
+      div.classList.remove('aprobado');
+    } else {
+      div.classList.remove('bloqueado', 'aprobado');
     }
-  }
+  });
 }
 
-generarMalla();
+crearSemestres();
 actualizarVisual();
