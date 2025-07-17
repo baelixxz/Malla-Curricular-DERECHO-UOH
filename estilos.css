@@ -1,12 +1,7 @@
-@font-face {
-  font-family: 'Arial Nova Cont';
-  src: local('Arial Nova Cont'), local('Arial');
-  font-weight: normal;
-  font-style: normal;
-}
+/* estilos.css */
 
 body {
-  font-family: 'Arial Nova Cont', Arial, sans-serif;
+  font-family: 'Arial Nova Condensed', Arial, sans-serif;
   font-size: 12pt;
   background: #fff0f5;
   color: #4b1c33;
@@ -22,64 +17,81 @@ h1 {
 
 #semestres-container {
   display: flex;
-  gap: 25px;
-  max-width: 1100px;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
   margin: 0 auto;
-  overflow-x: auto;
-  padding-bottom: 15px;
 }
 
 .semestre {
-  border: 2px solid #800000;
-  border-radius: 10px;
-  background: #ffe4ec;
-  padding: 12px 16px;
+  background: #ff96c5;
+  border: 2px solid #ff1b82;
+  border-radius: 12px;
+  padding: 15px;
   min-width: 250px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 1px 1px 6px rgba(128, 0, 0, 0.25);
+  gap: 10px;
+  box-shadow: 2px 2px 8px rgba(255, 27, 130, 0.3);
 }
 
 .semestre h2 {
+  margin-top: 0;
+  color: #ff1b82;
   text-align: center;
-  color: #800000;
-  margin: 0 0 8px 0;
   font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .ramo {
   background: #ffc0cb;
-  border: 2px solid #800000;
+  border: 2px solid #f70071;
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 10px;
   cursor: pointer;
   user-select: none;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    font-style 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   text-align: center;
-  font-weight: 600;
-  color: #4b1c33;
 }
 
-.ramo:hover:not(.bloqueado):not(.aprobado) {
-  background: #ff96c5;
-  color: #800000;
-}
-
-/* Bloqueados */
 .ramo.bloqueado {
   opacity: 0.5;
   cursor: default;
+  background: #ffd9e8;
+  border-color: #ff96c5;
+  color: #a36682;
+  font-style: normal;
+  text-decoration: none;
 }
 
-/* Aprobados */
 .ramo.aprobado {
-  background: #f70071; /* color principal aprobado */
+  background: #f70071; /* primer color que me diste */
   color: white;
-  font-style: italic;
   text-decoration: line-through;
+  font-style: italic;
   cursor: default;
+}
+
+.ramo.aprobado:nth-child(1) {
+  background: #f70071; /* primer color */
+}
+
+.ramo.aprobado:nth-child(2) {
+  background: #ff1b82; /* segundo color */
+}
+
+.ramo.aprobado:nth-child(3) {
+  background: #ff5aa4; /* tercero */
+}
+
+.ramo.aprobado:nth-child(4) {
+  background: #ff96c5; /* cuarto */
+}
+
+/* Opcional: efecto hover para ramos desbloqueados */
+.ramo:not(.bloqueado):not(.aprobado):hover {
+  background: #ff5aa4;
+  color: #4b1c33;
+  font-weight: bold;
 }
